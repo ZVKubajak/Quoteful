@@ -1,0 +1,20 @@
+{
+  "name": "quoteful",
+  "version": "1.0.0",
+  "description": "A website to explore and create your own thoughtful quotes.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZVKubajak/Quoteful.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ZVKubajak/Quoteful/issues"
+  },
+  "homepage": "https://github.com/ZVKubajak/Quoteful#readme"
+}
