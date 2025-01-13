@@ -53,7 +53,7 @@ export const getUserById = async (req: Request, res: Response) => {
   }
 };
 
-export const createUser = async (req: Request, res: Response) => {
+export const createUser = async (req: Request, res: any) => {
   const { username, email, password } = req.body;
 
   try {
@@ -90,7 +90,7 @@ export const createUser = async (req: Request, res: Response) => {
   }
 };
 
-export const updateUser = async (req: Request, res: Response) => {
+export const updateUser = async (req: Request, res: any) => {
   const { id } = req.params;
   const { username, email, password, myQuotes } = req.body;
 
