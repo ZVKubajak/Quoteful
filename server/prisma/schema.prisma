@@ -13,10 +13,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum QuoteTag {
+  INTERESTING
+  MEMORABLE
+  MOTIVATIONAL
+  POSITIVE
+  THOUGHTFUL
+}
+
 model User {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   username  String
   email     String   @unique
   password  String
+  myQuotes  Quote[]  @relation("UserQuotes")
+  createdAt DateTime @default(now())
+}
+
+model Quote {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String?  @db.ObjectId
+  user      User?    @relation("UserQuotes", fields: [userId], references: [id])
+  tag       QuoteTag
+  content   String
   createdAt DateTime @default(now())
 }
