@@ -4,7 +4,10 @@
   "description": "A website to explore and create your own thoughtful quotes.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start-dev": "cd server && npm run dev",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "build": "cd server && npm run build",
+    "render-build": "npm i && npm run build"
   },
   "repository": {
     "type": "git",
@@ -16,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/ZVKubajak/Quoteful/issues"
   },
-  "homepage": "https://github.com/ZVKubajak/Quoteful#readme"
+  "homepage": "https://github.com/ZVKubajak/Quoteful#readme",
+  "dependencies": {
+    "concurrently": "^9.1.2",
+    "wait-on": "^8.0.2"
+  }
 }
