@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request } from "express";
 import { OpenAI } from "@langchain/openai";
 import { PromptTemplate } from "@langchain/core/prompts";
 import dotenv from "dotenv";
@@ -23,7 +23,7 @@ const promptTemplate = new PromptTemplate({
   inputVariables: ["user_input"],
 });
 
-export const generateAIResponse = async (req: Request, res: Response) => {
+export const generateAIResponse = async (req: Request, res: any) => {
   const { tag, prompt } = req.body;
 
   try {
