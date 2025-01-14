@@ -108,7 +108,6 @@ export const login = async (req: Request, res: Response) => {
   try {
     const user = await prisma.user.findUnique({
       where: { email },
-      include: { myQuotes: { select: { id: true } } }, // For ID access.
     });
     if (!user) {
       return res.status(401).json({ message: "Authentication failed." });
@@ -120,10 +119,9 @@ export const login = async (req: Request, res: Response) => {
     }
 
     const secretKey = process.env.JWT_SECRET_KEY || "";
-    const quoteIds = user.myQuotes.map((quote) => quote.id);
 
     const token = jwt.sign(
-      { id: user.id, username: user.username, myQuotes: quoteIds },
+      { id: user.id, username: user.username },
       secretKey,
       { expiresIn: "24h" }
     );
