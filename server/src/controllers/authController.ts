@@ -89,7 +89,7 @@ export const signUp = async (req: Request, res: Response) => {
     const token = jwt.sign(
       { id: newUser.id, username: newUser.username },
       secretKey,
-      { expiresIn: "24h" }
+      { expiresIn: "7d" }
     );
 
     return res.status(201).json({
