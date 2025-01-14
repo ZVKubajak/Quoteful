@@ -56,7 +56,7 @@ export const getQuoteById = async (req: Request, res: Response) => {
   }
 };
 
-export const createQuote = async (req: Request, res: Response) => {
+export const createQuote = async (req: Request, res: any) => {
   const { userId, tag, content } = req.body;
 
   try {
@@ -81,7 +81,7 @@ export const createQuote = async (req: Request, res: Response) => {
   }
 };
 
-export const updateQuote = async (req: Request, res: Response) => {
+export const updateQuote = async (req: Request, res: any) => {
   const { id } = req.params;
   const { tag, content } = req.body;
 
