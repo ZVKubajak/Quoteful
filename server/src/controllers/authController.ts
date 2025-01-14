@@ -51,7 +51,7 @@ export const authenticateToken = (
   }
 };
 
-export const signUp = async (req: Request, res: Response) => {
+export const signUp = async (req: Request, res: any) => {
   const { username, email, password } = req.body;
 
   try {
@@ -102,7 +102,7 @@ export const signUp = async (req: Request, res: Response) => {
   }
 };
 
-export const login = async (req: Request, res: Response) => {
+export const login = async (req: Request, res: any) => {
   const { email, password } = req.body;
 
   try {
