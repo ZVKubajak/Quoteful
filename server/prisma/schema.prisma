@@ -31,10 +31,10 @@ model User {
 }
 
 model Quote {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId    String?  @db.ObjectId
-  user      User?    @relation("UserQuotes", fields: [userId], references: [id])
-  tag       QuoteTag
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String    @db.ObjectId
+  user      User      @relation("UserQuotes", fields: [userId], references: [id], onDelete: Cascade)
+  tag       QuoteTag?
   content   String
-  createdAt DateTime @default(now())
+  createdAt DateTime  @default(now())
 }
