@@ -66,11 +66,14 @@ export const createQuote = async (req: Request, res: any) => {
       return res.status(400).json({ message: "Content is required." });
     }
 
-    const quote = prisma.quote.create({
-      data: {
-        userId,
-        tag: tag || null,
-        content,
+    const quote = await prisma.quote.create({
+      data: { userId, tag: tag || null, content },
+      select: {
+        id: true,
+        user: true,
+        tag: true,
+        content: true,
+        createdAt: true,
       },
     });
 
@@ -100,6 +103,8 @@ export const updateQuote = async (req: Request, res: any) => {
 
     if (!content || validator.isEmpty(content)) {
       return res.status(400).json({ message: "Content is required." });
+    } else {
+      updateData.content = content;
     }
 
     const updatedQuote = await prisma.quote.update({
@@ -116,7 +121,7 @@ export const updateQuote = async (req: Request, res: any) => {
 
     res
       .status(200)
-      .json({ message: "Quote updated successfully.", updateQuote });
+      .json({ message: "Quote updated successfully.", updatedQuote });
   } catch (error: any) {
     console.error("Error updating quote:", error);
     res.json(500).json({ message: error.message });
@@ -135,9 +140,9 @@ export const deleteQuote = async (req: Request, res: Response) => {
       await prisma.quote.delete({
         where: { id },
       });
-      res.status(200).json({ message: "User deleted successfully." });
+      res.status(200).json({ message: "Quote deleted successfully." });
     } else {
-      res.status(404).json({ message: "User not found." });
+      res.status(404).json({ message: "Quote not found." });
     }
   } catch (error: any) {
     console.error("Error deleting user:", error);
