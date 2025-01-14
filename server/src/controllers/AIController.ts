@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { OpenAI } from "@langchain/openai";
+import { ChatOpenAI } from "@langchain/openai";
 import { PromptTemplate } from "@langchain/core/prompts";
 import dotenv from "dotenv";
 
@@ -11,7 +11,7 @@ if (!apiKey) {
   throw new Error("OPENAI_API_KEY is not configured.");
 }
 
-const model = new OpenAI({
+const model = new ChatOpenAI({
   temperature: 0,
   openAIApiKey: apiKey,
   modelName: "gpt-4o",
@@ -43,7 +43,7 @@ export const generateAIResponse = async (req: Request, res: any) => {
 
     res
       .status(200)
-      .json({ message: "Quote generated successfully.", quote: response });
+      .json({ message: "Quote generated successfully.", quote: response.lc_kwargs.content });
   } catch (error: any) {
     console.error("Error generating quote:", error);
     res.status(500).json({ message: error.message });
