@@ -14,11 +14,12 @@ datasource db {
 }
 
 enum QuoteTag {
+  FUNNY
   INTERESTING
   MEMORABLE
   MOTIVATIONAL
   POSITIVE
-  THOUGHTFUL
+  PROFOUND
 }
 
 model User {
