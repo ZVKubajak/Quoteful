@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import { Quote } from "lucide-react";
 
 const Header = () => {
@@ -12,7 +13,11 @@ const Header = () => {
         </Link>
       </div>
 
-      <nav id="nav-bar" aria-label="Main Navigation" className="text-center text-2xl space-x-8">
+      <nav
+        id="nav-bar"
+        aria-label="Main Navigation"
+        className="text-center text-2xl space-x-8 pl-12"
+      >
         <Link
           to="/explore"
           className={`text-gray-400 hover:text-white ${
@@ -47,8 +52,10 @@ const Header = () => {
         </Link>
       </nav>
 
-      <div id="account-buttons" className="px-8">
-        {/* This is where the Sign In and Sign Out buttons will go. */}
+      <div id="account-buttons" className="px-4">
+        <Button asChild variant="ghost" className="text-xl bg-white text-black">
+          <Link to="/login">Login</Link>
+        </Button>
       </div>
     </header>
   );
