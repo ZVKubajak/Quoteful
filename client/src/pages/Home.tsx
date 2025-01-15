@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+
 const Home = () => {
   return (
     <main>
@@ -6,8 +8,8 @@ const Home = () => {
         <p>Explore and create your own thoughtful quotes.</p>
 
         <div className="heading-cta-buttons">
-          <button>Explore</button>
-          <button>Create a Quote</button>
+          <Button>Explore</Button>
+          <button className="bg-red-500 text-white p-4">Create a Quote</button>
         </div>
       </section>
     </main>
