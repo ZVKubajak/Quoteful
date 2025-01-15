@@ -29,14 +29,14 @@ const Home = () => {
             matter, and those who matter don't mind."
           </p>
           <h2 className="pl-4">
-            <span className="pr-1">―</span> Frank Zappa
+            <span className="pr-1">―</span> Bernard Baruch
           </h2>
         </div>
 
         <div className="w-1/4 border-2 rounded-lg p-4">
           <p className="pb-8">“So many books, so little time.”</p>
           <h2 className="pl-4">
-            <span className="pr-1">―</span> Bernard Baruch
+            <span className="pr-1">―</span> Frank Zappa
           </h2>
         </div>
 
