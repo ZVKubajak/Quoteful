@@ -16,7 +16,7 @@ const Header = () => {
       <nav
         id="nav-bar"
         aria-label="Main Navigation"
-        className="text-center text-2xl space-x-8 pl-12"
+        className="text-center text-2xl space-x-8 pl-16"
       >
         <Link
           to="/explore"

@@ -6,6 +6,7 @@ export default {
     extend: {
       fontFamily: {
         caveat: ["Caveat", "sans-serif"],
+        montserrat: ["Montserrat", "sans"]
       },
       borderRadius: {
         lg: "var(--radius)",
