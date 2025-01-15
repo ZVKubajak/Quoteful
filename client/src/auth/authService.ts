@@ -1,60 +1,45 @@
-import { jwtDecode } from "jwt-decode";
+import axios from "axios";
+import TypeLogin from "@/interfaces/login";
 
-// This is OOP.
-// Works similar to PrismaClient.
-
-class AuthService {
-  login(idToken: string) {
-    localStorage.setItem("id_token", idToken);
-    window.location.assign("/");
-  }
-
-  logout() {
-    localStorage.removeItem("id_token");
-    window.location.assign("/");
-  }
-
-  getToken(): string {
-    return localStorage.getItem("id_token") || "";
-  }
-
-  isTokenExpired(token: string): boolean {
-    try {
-      const decoded: { exp: number } = jwtDecode(token);
-      const currentTime = Date.now() / 1000;
-      return decoded.exp < currentTime;
-    } catch (error) {
-      console.error("Failed to decode token:", error);
-      return true;
-    }
-  }
-
-  getProfile() {
-    const token = this.getToken();
-    if (token && !this.isTokenExpired(token)) {
-      try {
-        const decoded = jwtDecode<{ id: string; username: string }>(token);
-        return decoded;
-      } catch (error) {
-        console.error("Failed to decode token:", error);
-        return null;
+export const signUp = async (userInfo: TypeLogin) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:3001/auth/signup",
+      userInfo,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    }
-    return null;
-  }
+    );
 
-  loggedIn() {
-    const token = this.getToken();
-    return token && !this.isTokenExpired(token);
+    return response.data;
+  } catch (error: any) {
+    console.error("Error from user sign up:", error);
+    const errorMessage =
+      error.response?.data?.message || "Could not fetch use info.";
+    return Promise.reject(errorMessage);
   }
+};
 
-  handleTokenExpiration() {
-    const token = this.getToken();
-    if (token && this.isTokenExpired(token)) {
-      this.logout();
-    }
+export const login = async (userInfo: TypeLogin) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:3001/auth/login",
+      userInfo,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error: any) {
+    console.error("Error from user login:", error);
+
+    const errorMessage =
+      error.response?.data?.message || "Could not fetch use info.";
+    return Promise.reject(errorMessage);
   }
-}
-
-const authService = new AuthService();
-export default authService;
+};
