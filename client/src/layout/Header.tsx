@@ -5,17 +5,17 @@ const Header = () => {
   const currentPage = useLocation().pathname;
 
   return (
-    <header className="border-b-2 border-neutral-700">
+    <header className="flex items-center justify-between h-20 px-4 border-b-2 border-neutral-700">
       <div id="logo">
         <Link to="/">
-          <Quote />
+          <Quote size={50} />
         </Link>
       </div>
 
-      <nav id="nav-bar" aria-label="Main Navigation">
+      <nav id="nav-bar" aria-label="Main Navigation" className="text-center text-2xl space-x-8">
         <Link
           to="/explore"
-          className={`hover:underline ${
+          className={`text-gray-400 hover:text-white ${
             currentPage === "/explore" ? "text-white-400 font-bold" : ""
           }`}
         >
@@ -23,7 +23,7 @@ const Header = () => {
         </Link>
         <Link
           to="/create"
-          className={`hover:underline ${
+          className={`text-gray-400 hover:text-white ${
             currentPage === "/create" ? "text-white-400 font-bold" : ""
           }`}
         >
@@ -31,7 +31,7 @@ const Header = () => {
         </Link>
         <Link
           to="/my-quotes"
-          className={`hover:underline ${
+          className={`text-gray-400 hover:text-white ${
             currentPage === "/my-quotes" ? "text-white-400 font-bold" : ""
           }`}
         >
@@ -39,7 +39,7 @@ const Header = () => {
         </Link>
         <Link
           to="/support"
-          className={`hover:underline ${
+          className={`text-gray-400 hover:text-white ${
             currentPage === "/support" ? "text-white-400 font-bold" : ""
           }`}
         >
@@ -47,7 +47,7 @@ const Header = () => {
         </Link>
       </nav>
 
-      <div id="account-buttons">
+      <div id="account-buttons" className="px-8">
         {/* This is where the Sign In and Sign Out buttons will go. */}
       </div>
     </header>
