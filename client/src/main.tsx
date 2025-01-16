@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./index.css";
 import App from "./App.tsx";
-// import { AuthGuard, LoggedInAuth } from "./auth/AuthGuard.tsx";
+import { AuthGuard, LoggedInAuth } from "./auth/AuthGuard.tsx";
 
 import Home from "./pages/Home.tsx";
 import Explore from "./pages/Explore.tsx";
@@ -33,19 +33,35 @@ const router = createBrowserRouter([
       },
       {
         path: "/my-quotes",
-        element: <MyQuotes />,
+        element: (
+          <AuthGuard>
+            <MyQuotes />
+          </AuthGuard>
+        ),
       },
       {
         path: "/support",
-        element: <Support />,
+        element: (
+          <AuthGuard>
+            <Support />
+          </AuthGuard>
+        ),
       },
       {
         path: "/login",
-        element: <Login />,
+        element: (
+          <LoggedInAuth>
+            <Login />
+          </LoggedInAuth>
+        ),
       },
       {
         path: "/signup",
-        element: <SignUp />,
+        element: (
+          <LoggedInAuth>
+            <SignUp />
+          </LoggedInAuth>
+        ),
       },
     ],
   },

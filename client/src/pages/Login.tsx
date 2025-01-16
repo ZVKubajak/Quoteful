@@ -54,9 +54,7 @@ const Login = () => {
   };
 
   const handleGuestLogin = () => {
-    const guestToken = `guest-${Math.random().toString(36).substring(2, 9)}`;
-    localStorage.setItem("guest_token", guestToken);
-
+    auth.guestLogin();
     navigate("/");
   };
 

@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 import auth from "./auth";
 
 export const AuthGuard = ({ children }: { children: JSX.Element }) => {
-  if (!auth.loggedIn()) {
+  if (!auth.loggedIn() && !auth.guestLoggedIn()) {
     return <Navigate to="/login" replace />;
   }
   return children;
