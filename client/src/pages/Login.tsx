@@ -5,6 +5,7 @@ import validator from "validator";
 import { login } from "@/auth/authService";
 import auth from "@/auth/auth";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -61,7 +62,8 @@ const Login = () => {
 
   return (
     <main>
-      <h1 className="text-center font-caveat text-8xl pt-16 pb-20">Login</h1>
+      <h1 className="text-center font-caveat text-8xl py-16">Login</h1>
+
       <div className="flex justify-evenly">
         <Form {...form}>
           <form
@@ -136,6 +138,13 @@ const Login = () => {
           </form>
         </Form>
       </div>
+
+      <p className="text-center text-md text-gray-300 pt-8">
+        Create an account{" "}
+        <Link to="/signup">
+          <span className="text-blue-400 hover:text-blue-500">here</span>.
+        </Link>
+      </p>
     </main>
   );
 };
