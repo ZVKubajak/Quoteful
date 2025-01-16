@@ -29,10 +29,13 @@ const signupFormSchema = z.object({
   email: z.string().refine((value) => validator.isEmail(value), {
     message: "Invalid email address.",
   }),
-  password: z.string().max(20).refine((value) => validator.isStrongPassword(value), {
-    message:
-      "Password must be 8-20 characters long, include at least one lowercase letter, one uppercase letter, one number, and one special character.",
-  }),
+  password: z
+    .string()
+    .max(20)
+    .refine((value) => validator.isStrongPassword(value), {
+      message:
+        "Password must be 8-20 characters long, include at least one lowercase letter, one uppercase letter, one number, and one special character.",
+    }),
 });
 
 const SignUp = () => {
@@ -160,6 +163,13 @@ const SignUp = () => {
           </form>
         </Form>
       </div>
+
+      <p className="text-center text-md text-gray-300 pt-8">
+        Already have an account? Login{" "}
+        <Link to="/login">
+          <span className="text-blue-400 hover:text-blue-500">here</span>.
+        </Link>
+      </p>
     </main>
   );
 };
