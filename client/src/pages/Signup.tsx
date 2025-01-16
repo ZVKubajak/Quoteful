@@ -65,7 +65,7 @@ const SignUp = () => {
 
   return (
     <main>
-      <h1 className="text-center font-caveat text-8xl py-16">
+      <h1 className="text-center font-caveat text-6xl py-16">
         Create an Account
       </h1>
 
@@ -73,7 +73,7 @@ const SignUp = () => {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="w-1/5 border-2 border-gray-400 rounded-xl shadow-xl shadow-gray-900 px-12 py-8 space-y-8"
+            className="w-1/5 border-2 border-gray-400 rounded-xl shadow-xl shadow-gray-900 px-12 py-8 space-y-6"
           >
             <FormField
               control={form.control}
@@ -84,10 +84,14 @@ const SignUp = () => {
                   <FormControl>
                     <Input
                       type="username"
+                      placeholder="Bryce Berczik"
                       className="bg-zinc-950 border-zinc-600"
                       {...field}
                     />
                   </FormControl>
+                  <FormDescription>
+                    Other users will see this. 3-20 characters.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -101,6 +105,7 @@ const SignUp = () => {
                   <FormControl>
                     <Input
                       type="email"
+                      placeholder="my@email.com"
                       className="bg-zinc-950 border-zinc-600"
                       {...field}
                     />
@@ -118,10 +123,16 @@ const SignUp = () => {
                   <FormControl>
                     <Input
                       type="password"
+                      placeholder="Password123!"
                       className="bg-zinc-950 border-zinc-600"
                       {...field}
                     />
                   </FormControl>
+                  <FormDescription>
+                    Password must be 8-20 characters long, include at least one
+                    lowercase letter, one uppercase letter, one number, and one
+                    special character.
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
