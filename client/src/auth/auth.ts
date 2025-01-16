@@ -48,7 +48,7 @@ class Auth {
 
   loggedIn() {
     const token = this.getToken();
-    return token && !this.isTokenExpired(token);
+    return !!token && !this.isTokenExpired(token);
   }
 
   guestLoggedIn() {

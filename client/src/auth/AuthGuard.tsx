@@ -9,7 +9,7 @@ export const AuthGuard = ({ children }: { children: JSX.Element }) => {
 };
 
 export const LoggedInAuth = ({ children }: { children: JSX.Element }) => {
-  if (auth.loggedIn() || auth.guestLoggedIn()) {
+  if (auth.loggedIn()) {
     return <Navigate to="/" replace />;
   }
   return children;
