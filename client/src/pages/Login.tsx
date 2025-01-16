@@ -10,7 +10,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -54,64 +53,67 @@ const Login = () => {
   };
 
   return (
-    <main className="flex justify-evenly pt-56">
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="w-1/5 border-2 border-gray-400 rounded-xl shadow-xl shadow-gray-900 px-12 py-8 space-y-8"
-        >
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-lg">Email</FormLabel>
-                <FormControl>
-                  <Input
-                    type="email"
-                    className="bg-zinc-950 border-zinc-600"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-lg">Password</FormLabel>
-                <FormControl>
-                  <Input
-                    type="password"
-                    className="bg-zinc-950 border-zinc-600"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+    <main>
+      <h1 className="text-center font-caveat text-8xl pt-28 pb-20">Login</h1>
+      <div className="flex justify-evenly">
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="w-1/5 border-2 border-gray-400 rounded-xl shadow-xl shadow-gray-900 px-12 py-8 space-y-8"
+          >
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg">Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      className="bg-zinc-950 border-zinc-600"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg">Password</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      className="bg-zinc-950 border-zinc-600"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-          {form.formState.errors.root && (
-            <p className="text-red-500 text-sm text-center">
-              {form.formState.errors.root.message}
-            </p>
-          )}
+            {form.formState.errors.root && (
+              <p className="text-red-500 text-sm text-center">
+                {form.formState.errors.root.message}
+              </p>
+            )}
 
-          <div className="flex justify-evenly">
-            <Button
-              type="submit"
-              variant="outline"
-              className="bg-neutral-950 border-lime-300 text-lg px-16 transition duration-250 hover:bg-default-950 hover:text-inherit hover:shadow-lg hover:shadow-lime-300/10"
-            >
-              Submit
-            </Button>
-          </div>
-        </form>
-      </Form>
+            <div className="flex justify-evenly">
+              <Button
+                type="submit"
+                variant="outline"
+                className="bg-neutral-950 border-lime-300 text-lg px-16 transition duration-250 hover:bg-default-950 hover:text-inherit hover:shadow-lg hover:shadow-lime-300/10"
+              >
+                Submit
+              </Button>
+            </div>
+          </form>
+        </Form>
+      </div>
     </main>
   );
 };
