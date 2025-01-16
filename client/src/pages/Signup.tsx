@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-const signUpFormSchema = z.object({
+const signupFormSchema = z.object({
   username: z
     .string()
     .min(3, {
@@ -40,8 +40,8 @@ const signUpFormSchema = z.object({
 const SignUp = () => {
   const navigate = useNavigate();
 
-  const form = useForm<z.infer<typeof signUpFormSchema>>({
-    resolver: zodResolver(signUpFormSchema),
+  const form = useForm<z.infer<typeof signupFormSchema>>({
+    resolver: zodResolver(signupFormSchema),
     defaultValues: {
       username: "",
       email: "",
@@ -49,7 +49,7 @@ const SignUp = () => {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof signUpFormSchema>) => {
+  const onSubmit = async (values: z.infer<typeof signupFormSchema>) => {
     try {
       const { token } = await signUp(values);
       auth.login(token);
@@ -65,7 +65,70 @@ const SignUp = () => {
 
   return (
     <main>
-      <div></div>
+      <h1 className="text-center font-caveat text-8xl py-16">
+        Create an Account
+      </h1>
+
+      <div className="flex justify-evenly">
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="w-1/5 border-2 border-gray-400 rounded-xl shadow-xl shadow-gray-900 px-12 py-8 space-y-8"
+          >
+            <FormField
+              control={form.control}
+              name="username"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg">Username</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="username"
+                      className="bg-zinc-950 border-zinc-600"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg">Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      className="bg-zinc-950 border-zinc-600"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg">Password</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      className="bg-zinc-950 border-zinc-600"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </form>
+        </Form>
+      </div>
     </main>
   );
 };
