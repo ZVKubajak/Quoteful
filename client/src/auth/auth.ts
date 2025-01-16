@@ -6,12 +6,15 @@ import { jwtDecode } from "jwt-decode";
 class Auth {
   login(idToken: string) {
     localStorage.setItem("id_token", idToken);
-    window.location.assign("/");
+  }
+
+  guestLogin() {
+    const guestToken = `guest-${Math.random().toString(36).substring(2, 9)}`;
+    localStorage.setItem("guest_token", guestToken);
   }
 
   logout() {
     localStorage.removeItem("id_token");
-    window.location.assign("/");
   }
 
   getToken(): string {
