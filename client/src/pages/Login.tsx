@@ -23,8 +23,7 @@ const loginFormSchema = z.object({
     message: "Invalid email address.",
   }),
   password: z.string().refine((value) => validator.isStrongPassword(value), {
-    message:
-      "Password must be 8-20 characters long, include at least one lowercase letter, one uppercase letter, one number, and one special character.",
+    message: "Invalid password.",
   }),
 });
 
@@ -47,6 +46,10 @@ const Login = () => {
       navigate("/");
     } catch (errorMessage: any) {
       console.error("Login Failed:", errorMessage);
+      form.setError("root", {
+        message:
+          "No account found with that email address or incorrect password.",
+      });
     }
   };
 
@@ -91,13 +94,20 @@ const Login = () => {
               </FormItem>
             )}
           />
+
+          {form.formState.errors.root && (
+            <p className="text-red-500 text-sm text-center">
+              {form.formState.errors.root.message}
+            </p>
+          )}
+
           <div className="flex justify-evenly">
             <Button
               type="submit"
               variant="outline"
-              className="bg-neutral-950 border-lime-300 px-20"
+              className="bg-neutral-950 border-lime-300 text-lg px-16 transition duration-250 hover:bg-default-950 hover:text-inherit hover:shadow-lg hover:shadow-lime-300/10"
             >
-              Login
+              Submit
             </Button>
           </div>
         </form>
