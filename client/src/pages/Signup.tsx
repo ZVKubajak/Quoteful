@@ -25,13 +25,11 @@ const signupFormSchema = z.object({
     .min(3, {
       message: "Username must be at least 3 characters.",
     })
-    .max(20, {
-      message: "Username can not be more than 20 characters.",
-    }),
+    .max(20),
   email: z.string().refine((value) => validator.isEmail(value), {
     message: "Invalid email address.",
   }),
-  password: z.string().refine((value) => validator.isStrongPassword(value), {
+  password: z.string().max(20).refine((value) => validator.isStrongPassword(value), {
     message:
       "Password must be 8-20 characters long, include at least one lowercase letter, one uppercase letter, one number, and one special character.",
   }),
@@ -89,9 +87,11 @@ const SignUp = () => {
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription>
-                    Other users will see this. 3-20 characters.
-                  </FormDescription>
+                  {!form.formState.errors.username && (
+                    <FormDescription>
+                      Other users will see this. 3-20 characters.
+                    </FormDescription>
+                  )}
                   <FormMessage />
                 </FormItem>
               )}
@@ -128,15 +128,35 @@ const SignUp = () => {
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription>
-                    Password must be 8-20 characters long, include at least one
-                    lowercase letter, one uppercase letter, one number, and one
-                    special character.
-                  </FormDescription>
+                  {!form.formState.errors.password && (
+                    <FormDescription>
+                      Password must be 8-20 characters long, include at least
+                      one lowercase letter, one uppercase letter, one number,
+                      and one special character.
+                    </FormDescription>
+                  )}
                   <FormMessage />
                 </FormItem>
               )}
             />
+
+            {form.formState.errors.root && (
+              <p className="text-red-500 text-sm text-center">
+                {form.formState.errors.root.message}
+              </p>
+            )}
+
+            <div>
+              <div className="flex justify-evenly">
+                <Button
+                  type="submit"
+                  variant="outline"
+                  className="bg-neutral-950 border-purple-500 text-lg px-16 transition duration-250 hover:bg-default-950 hover:text-inherit hover:shadow-lg hover:shadow-indigo-500/10"
+                >
+                  Sign Up
+                </Button>
+              </div>
+            </div>
           </form>
         </Form>
       </div>
