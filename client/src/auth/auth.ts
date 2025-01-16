@@ -5,6 +5,9 @@ import { jwtDecode } from "jwt-decode";
 
 class Auth {
   login(idToken: string) {
+    const guestToken = localStorage.getItem("guest_token");
+    if (guestToken) localStorage.removeItem("guest_token");
+
     localStorage.setItem("id_token", idToken);
   }
 
