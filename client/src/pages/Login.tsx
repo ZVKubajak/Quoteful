@@ -51,19 +51,25 @@ const Login = () => {
   };
 
   return (
-    <main>
+    <main className="flex justify-evenly pt-56">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="w-1/5 border-2 border-gray-400 rounded-xl shadow-xl shadow-gray-900 px-12 py-8 space-y-8"
+        >
           <FormField
             control={form.control}
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel className="text-lg">Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="Your Email" {...field} />
+                  <Input
+                    type="email"
+                    className="bg-zinc-950 border-zinc-600"
+                    {...field}
+                  />
                 </FormControl>
-                <FormDescription>This is your email.</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -73,22 +79,27 @@ const Login = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Password</FormLabel>
+                <FormLabel className="text-lg">Password</FormLabel>
                 <FormControl>
                   <Input
                     type="password"
-                    placeholder="Your Password"
+                    className="bg-zinc-950 border-zinc-600"
                     {...field}
                   />
                 </FormControl>
-                <FormDescription>
-                  Your password must meet the security requirements.
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit">Login</Button>
+          <div className="flex justify-evenly">
+            <Button
+              type="submit"
+              variant="outline"
+              className="bg-neutral-950 border-lime-300 px-20"
+            >
+              Login
+            </Button>
+          </div>
         </form>
       </Form>
     </main>
