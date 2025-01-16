@@ -51,6 +51,10 @@ class Auth {
     return token && !this.isTokenExpired(token);
   }
 
+  guestLoggedIn() {
+    return !!localStorage.getItem("guest_token");
+  }
+
   handleTokenExpiration() {
     const token = this.getToken();
     if (token && this.isTokenExpired(token)) {
