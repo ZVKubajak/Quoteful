@@ -59,7 +59,7 @@ const SignUp = () => {
     } catch (errorMessage: any) {
       console.error("Signup Failed:", errorMessage);
       form.setError("root", {
-        message: "Unable to create account, please try again.",
+        message: "Unable to create account, this email may already be in use.",
       });
     }
   };
