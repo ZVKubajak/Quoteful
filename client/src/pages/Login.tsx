@@ -52,9 +52,16 @@ const Login = () => {
     }
   };
 
+  const handleGuestLogin = () => {
+    const guestToken = `guest-${Math.random().toString(36).substring(2, 9)}`;
+    localStorage.setItem("guest_token", guestToken);
+
+    navigate("/");
+  };
+
   return (
     <main>
-      <h1 className="text-center font-caveat text-8xl pt-28 pb-20">Login</h1>
+      <h1 className="text-center font-caveat text-8xl pt-16 pb-20">Login</h1>
       <div className="flex justify-evenly">
         <Form {...form}>
           <form
@@ -102,14 +109,29 @@ const Login = () => {
               </p>
             )}
 
-            <div className="flex justify-evenly">
-              <Button
-                type="submit"
-                variant="outline"
-                className="bg-neutral-950 border-lime-300 text-lg px-16 transition duration-250 hover:bg-default-950 hover:text-inherit hover:shadow-lg hover:shadow-lime-300/10"
-              >
-                Submit
-              </Button>
+            <div>
+              <div className="flex justify-evenly">
+                <Button
+                  type="submit"
+                  variant="outline"
+                  className="bg-neutral-950 border-lime-300 text-lg px-16 transition duration-250 hover:bg-default-950 hover:text-inherit hover:shadow-lg hover:shadow-lime-300/10"
+                >
+                  Submit
+                </Button>
+              </div>
+
+              <p className="text-center text-lg py-3">or</p>
+
+              <div className="flex justify-evenly">
+                <Button
+                  type="submit"
+                  variant="outline"
+                  className="bg-neutral-950 border-sky-300 text-md px-14 transition duration-250 hover:bg-default-950 hover:text-inherit hover:shadow-lg hover:shadow-sky-300/10"
+                  onClick={handleGuestLogin}
+                >
+                  Continue As Guest
+                </Button>
+              </div>
             </div>
           </form>
         </Form>
