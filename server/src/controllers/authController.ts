@@ -86,16 +86,14 @@ export const signUp = async (req: Request, res: any) => {
     });
 
     const secretKey = process.env.JWT_SECRET_KEY || "";
+
     const token = jwt.sign(
       { id: newUser.id, username: newUser.username },
       secretKey,
       { expiresIn: "7d" }
     );
 
-    return res.status(201).json({
-      message: "User created successfully.",
-      token,
-    });
+    return res.status(201).json({ token });
   } catch (error: any) {
     console.error("Error signing up user:", error);
     res.status(500).json({ message: error.message });
@@ -123,8 +121,9 @@ export const login = async (req: Request, res: any) => {
     const token = jwt.sign(
       { id: user.id, username: user.username },
       secretKey,
-      { expiresIn: "24h" }
+      { expiresIn: "7d" }
     );
+
     return res.json({ token });
   } catch (error: any) {
     console.error("Error logging in user:", error);

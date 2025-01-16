@@ -12,6 +12,7 @@ import Create from "./pages/Create.tsx";
 import MyQuotes from "./pages/MyQuotes.tsx";
 import Support from "./pages/Support.tsx";
 import Login from "./pages/Login.tsx";
+import SignUp from "./pages/Signup.tsx";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/signup",
+        element: <SignUp />,
       },
     ],
   },
