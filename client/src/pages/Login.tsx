@@ -2,6 +2,9 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import validator from "validator";
+import { login } from "@/auth/authService";
+import auth from "@/auth/auth";
+import { useNavigate } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -26,6 +29,8 @@ const loginFormSchema = z.object({
 });
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const form = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
@@ -34,8 +39,15 @@ const Login = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof loginFormSchema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof loginFormSchema>) => {
+    try {
+      const { token } = await login(values);
+      auth.login(token);
+
+      navigate("/");
+    } catch (errorMessage: any) {
+      console.error("Login Failed:", errorMessage);
+    }
   };
 
   return (
