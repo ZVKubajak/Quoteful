@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 const Home = () => {
@@ -10,11 +11,11 @@ const Home = () => {
         </p>
 
         <div id="heading-cta-buttons" className="space-x-4">
-          <Button variant="outline" className="bg-neutral-950">
-            Explore
+          <Button asChild variant="outline" className="bg-neutral-950">
+            <Link to="/explore">Explore</Link>
           </Button>
-          <Button variant="outline" className="bg-neutral-950">
-            Create a Quote
+          <Button asChild variant="outline" className="bg-neutral-950">
+            <Link to="/create">Create a Quote</Link>
           </Button>
         </div>
       </section>
