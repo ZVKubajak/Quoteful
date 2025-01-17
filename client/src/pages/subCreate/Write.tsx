@@ -4,6 +4,7 @@ import { z } from "zod";
 
 import { MoveLeft } from "lucide-react";
 import { CircleHelp } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -22,6 +23,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
 
 const quoteFormSchema = z.object({
   quote: z
@@ -67,7 +69,7 @@ const Write = () => {
       <h1 className="text-center text-6xl pt-8">Write Your Quote</h1>
 
       <div className="flex h-96 mx-48 my-20">
-        <section className="w-1/2 px-12">
+        <section id="quote-form" className="w-1/2 px-12">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <FormField
@@ -128,7 +130,28 @@ const Write = () => {
           </Form>
         </section>
 
-        <section className="border w-1/2"></section>
+        <section id="quote-preview" className="w-1/2 px-32 py-20">
+          <div className="w-full border rounded-2xl text-xl p-4">
+            <p>
+              "Your life is your own quote, so define it. Lorem ipsum dolor sit
+              amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua."
+            </p>
+
+            <div className="flex mt-10 mx-4">
+              <div className="flex w-3/5">
+                <h2 className="text-2xl">– Shashidhar Sa</h2>
+                <ExternalLink size={20} className="ml-3" />
+              </div>
+
+              <div className="flex justify-end w-2/5">
+                <Badge className="border border-yellow-400 rounded-lg text-lg">
+                  Funny
+                </Badge>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </main>
   );
