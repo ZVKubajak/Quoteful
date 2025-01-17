@@ -1,12 +1,14 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-
+import { useState } from "react";
 import auth from "@/auth/auth";
 import { useNavigate } from "react-router-dom";
 import { createQuote } from "@/services/quoteService";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+
 import Swal from "sweetalert2";
+import tagStyles from "@/lib/tagStyles";
 import { MoveLeft } from "lucide-react";
 import { CircleHelp } from "lucide-react";
 import { ExternalLink } from "lucide-react";
@@ -30,6 +32,8 @@ import {
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 
+type Tag = keyof typeof tagStyles;
+
 const quoteFormSchema = z.object({
   quote: z
     .string()
@@ -43,6 +47,11 @@ const quoteFormSchema = z.object({
 });
 
 const Write = () => {
+  const [content, setContent] = useState("");
+  const [tag, setTag] = useState<Tag | "">("");
+
+  const contentCharCount = 250;
+
   const navigate = useNavigate();
 
   let userId = "";
@@ -129,7 +138,13 @@ const Write = () => {
                     <FormLabel className="text-xl">
                       Tag <span className="text-gray-500">(optional)</span>
                     </FormLabel>
-                    <Select onValueChange={field.onChange}>
+                    <Select
+                      value={tag}
+                      onValueChange={(value) => {
+                        field.onChange(value);
+                        setTag(value as Tag);
+                      }}
+                    >
                       <FormControl className="bg-zinc-950 border-gray-800">
                         <SelectTrigger>
                           <SelectValue placeholder="Select a tag." />
@@ -176,11 +191,15 @@ const Write = () => {
                 <ExternalLink size={20} className="ml-3" />
               </div>
 
-              <div className="flex justify-end w-2/5">
-                <Badge className="border border-yellow-400 rounded-lg text-lg">
-                  Funny
-                </Badge>
-              </div>
+              {tag && (
+                <div className="flex justify-end w-2/5">
+                  <Badge
+                    className={`border-2 rounded-lg text-lg ${tagStyles[tag]}`}
+                  >
+                    {tag}
+                  </Badge>
+                </div>
+              )}
             </div>
           </div>
         </section>
