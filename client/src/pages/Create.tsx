@@ -6,11 +6,11 @@ const Create = () => {
     <main className="flex pt-20">
       <section
         id="left-container"
-        className="flex flex-col items-center w-1/2 border-r-2 border-gray-700 p-12"
+        className="flex flex-col items-center w-1/2 border-r border-gray-700 p-12"
       >
         <div
           id="left-card"
-          className="flex flex-col w-3/4 border-2 rounded-2xl mb-12 p-16 space-y-12"
+          className="flex flex-col w-3/4 border rounded-2xl mb-12 p-16 space-y-12"
         >
           <h2 className="text-center text-4xl">AI Quote Generator</h2>
 
@@ -31,12 +31,12 @@ const Create = () => {
 
       <section
         id="right-container"
-        className="flex flex-col items-center w-1/2 border-l-2 border-gray-700 p-12"
+        className="flex flex-col items-center w-1/2 border-l border-gray-700 p-12"
       >
         <h1 className="font-montserrat text-6xl">Have an Idea?</h1>
         <div
           id="right-card"
-          className="flex flex-col w-3/4 border-2 rounded-2xl mt-12 p-16 space-y-12"
+          className="flex flex-col w-3/4 border rounded-2xl mt-12 p-16 space-y-12"
         >
           <h2 className="text-center text-4xl">Create Your Own</h2>
 
