@@ -5,6 +5,7 @@ import { z } from "zod";
 import { MoveLeft } from "lucide-react";
 import { CircleHelp } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Form,
   FormControl,
@@ -14,7 +15,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const quoteFormSchema = z.object({
   quote: z
@@ -25,16 +32,7 @@ const quoteFormSchema = z.object({
     .max(250, {
       message: "Quote can not be more than 250 characters.",
     }),
-  tag: z
-    .enum([
-      "FUNNY",
-      "INTERESTING",
-      "MEMORABLE",
-      "MOTIVATIONAL",
-      "POSITIVE",
-      "PROFOUND",
-    ])
-    .optional(),
+  tag: z.string().optional(),
 });
 
 const Write = () => {
@@ -42,6 +40,7 @@ const Write = () => {
     resolver: zodResolver(quoteFormSchema),
     defaultValues: {
       quote: "",
+      tag: "",
     },
   });
 
@@ -68,26 +67,63 @@ const Write = () => {
       <h1 className="text-center text-6xl pt-8">Write Your Quote</h1>
 
       <div className="flex h-96 mx-48 my-20">
-        <section className="border w-1/2">
+        <section className="w-1/2 px-12">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form onSubmit={form.handleSubmit(onSubmit)}>
               <FormField
                 control={form.control}
                 name="quote"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Quote</FormLabel>
+                    <FormLabel className="text-3xl">Quote</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Textarea
+                        placeholder="Your life is your own quote, so define it. – Shashidhar Sa"
+                        className="resize-none bg-zinc-950 border-gray-800"
+                        {...field}
+                      />
                     </FormControl>
-                    <FormDescription>
-                      What do you want your quote to say?
-                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button type="submit">Post</Button>
+              <FormField
+                control={form.control}
+                name="tag"
+                render={({ field }) => (
+                  <FormItem className="w-[180px] mt-8">
+                    <FormLabel className="text-xl">
+                      Tag <span className="text-gray-500">(optional)</span>
+                    </FormLabel>
+                    <Select onValueChange={field.onChange}>
+                      <FormControl className="bg-zinc-950 border-gray-800">
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a tag." />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className="bg-zinc-950 text-white">
+                        <SelectItem value="FUNNY">Funny</SelectItem>
+                        <SelectItem value="INTERESTING">Interesting</SelectItem>
+                        <SelectItem value="MEMORABLE">Memorable</SelectItem>
+                        <SelectItem value="MOTIVATIONAL">
+                          Motivational
+                        </SelectItem>
+                        <SelectItem value="POSITIVE">Positive</SelectItem>
+                        <SelectItem value="PROFOUND">Profound</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormDescription>Leave blank for no tag.</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button
+                type="submit"
+                variant="ghost"
+                className="bg-white text-black text-xl mt-8 px-8"
+              >
+                Post
+              </Button>
             </form>
           </Form>
         </section>
