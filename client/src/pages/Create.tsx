@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 const Create = () => {
@@ -20,7 +21,9 @@ const Create = () => {
             tag that describes what kind of quote you want.
           </p>
 
-          <Button className="text-lg bg-green-600 hover:bg-green-700">Try it Out</Button>
+          <Button asChild className="text-lg bg-green-600 hover:bg-green-700">
+            <Link to="/create/generate">Try it Now</Link>
+          </Button>
         </div>
 
         <h1 className="font-montserrat text-6xl">Quotes tailored for you!</h1>
@@ -44,7 +47,9 @@ const Create = () => {
             that are personal to you private.
           </p>
 
-          <Button className="text-lg bg-yellow-700 hover:bg-yellow-800">Write a Quote</Button>
+          <Button asChild className="text-lg bg-yellow-700 hover:bg-yellow-800">
+            <Link to="/create/write">Write a Quote</Link>
+          </Button>
         </div>
       </section>
     </main>
