@@ -9,6 +9,8 @@ import { AuthGuard, LoggedInAuth } from "./auth/AuthGuard.tsx";
 import Home from "./pages/Home.tsx";
 import Explore from "./pages/Explore.tsx";
 import Create from "./pages/Create.tsx";
+import Generate from "./pages/subCreate/Generate.tsx";
+import Write from "./pages/subCreate/Write.tsx";
 import MyQuotes from "./pages/MyQuotes.tsx";
 import Support from "./pages/Support.tsx";
 import Login from "./pages/Login.tsx";
@@ -30,6 +32,14 @@ const router = createBrowserRouter([
       {
         path: "/create",
         element: <Create />,
+      },
+      {
+        path: "/create/generate",
+        element: <Generate />,
+      },
+      {
+        path: "/create/write",
+        element: <Write />,
       },
       {
         path: "/my-quotes",
