@@ -87,9 +87,34 @@ const Write = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof quoteFormSchema>) => {
-    // createQuote or return error.
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof quoteFormSchema>) => {
+    try {
+      await createQuote(userId, values.quote, values.tag || "");
+
+      Swal.fire({
+        title: "Quote Created",
+        text: "Check out your new quote or create another one.",
+        icon: "success",
+        showCloseButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Go To Quote",
+        cancelButtonText: "Write More",
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#3ea381",
+        background: "#333",
+        color: "#fff",
+        allowOutsideClick: true,
+        allowEscapeKey: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/my-quotes");
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          navigate("/create/write");
+        }
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
