@@ -2,6 +2,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import auth from "@/auth/auth";
+import { useNavigate } from "react-router-dom";
+import { createQuote } from "@/services/quoteService";
+
+import Swal from "sweetalert2";
 import { MoveLeft } from "lucide-react";
 import { CircleHelp } from "lucide-react";
 import { ExternalLink } from "lucide-react";
@@ -38,6 +43,33 @@ const quoteFormSchema = z.object({
 });
 
 const Write = () => {
+  const navigate = useNavigate();
+
+  let userId = "";
+  let username = "";
+  if (!auth.guestLoggedIn()) {
+    const profile = auth.getProfile();
+    if (profile) {
+      (userId = profile.id), (username = profile.username);
+    }
+  } else {
+    Swal.fire({
+      title: "Account Required",
+      text: "You need to create an account to write a quote.",
+      icon: "warning",
+      confirmButtonText: "Create Account",
+      confirmButtonColor: "#3085d6",
+      background: "#333",
+      color: "#fff",
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/signup");
+      }
+    });
+  }
+
   const form = useForm<z.infer<typeof quoteFormSchema>>({
     resolver: zodResolver(quoteFormSchema),
     defaultValues: {
@@ -140,7 +172,7 @@ const Write = () => {
 
             <div className="flex mt-10 mx-4">
               <div className="flex w-3/5">
-                <h2 className="text-2xl">– Shashidhar Sa</h2>
+                <h2 className="text-2xl">– {username}</h2>
                 <ExternalLink size={20} className="ml-3" />
               </div>
 

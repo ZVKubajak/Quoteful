@@ -39,7 +39,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/create/write",
-        element: <Write />,
+        element: (
+          <AuthGuard>
+            <Write />
+          </AuthGuard>
+        ),
       },
       {
         path: "/my-quotes",
