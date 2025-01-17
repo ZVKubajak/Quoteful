@@ -35,7 +35,7 @@ const Create = () => {
       >
         <h1 className="font-montserrat text-6xl">Have an Idea?</h1>
         <div
-          id="left-card"
+          id="right-card"
           className="flex flex-col w-3/4 border-2 rounded-2xl mt-12 p-16 space-y-12"
         >
           <h2 className="text-center text-4xl">Create Your Own</h2>
