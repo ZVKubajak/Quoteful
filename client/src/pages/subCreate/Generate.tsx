@@ -1,5 +1,14 @@
+import { useState } from "react";
+import auth from "@/auth/auth";
+import { useNavigate } from "react-router-dom";
+import { generateQuote } from "@/services/AIService";
+import { createQuote } from "@/services/quoteService";
+
+import Swal from "sweetalert2";
+import tagStyles from "@/lib/tagStyles";
 import IconBar from "@/components/IconBar";
 import { Send } from "lucide-react";
+import { Save } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -12,7 +21,26 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+type Tag = keyof typeof tagStyles;
+
 const Generate = () => {
+  const [prompt, setPrompt] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+  const [tag, setTag] = useState<Tag | "">("");
+
+  const promptCharCount = 200;
+
+  const navigate = useNavigate();
+
+  let userId = "";
+  let username = "";
+  if (!auth.guestLoggedIn()) {
+    const profile = auth.getProfile();
+    if (profile) {
+      (userId = profile.id), (username = profile.username);
+    }
+  }
+
   return (
     <main className="bg-lime-950/15 h-screen">
       <IconBar />
@@ -51,10 +79,11 @@ const Generate = () => {
             className="border-gray-500 transition duration-250 hover:shadow-md hover:shadow-gray-900 bg-zinc-950 text-white !text-xl h-12"
           />
         </div>
-        <div id="send-prompt-button" className="w-1/5">
+        <div id="send-prompt-button" className="flex w-1/5">
           <Button variant="outline" className="bg-zinc-950 text-md mt-1 ml-4">
             Send <Send />
           </Button>
+          <Save size={40} className="mt-1 ml-3" />
         </div>
       </div>
     </main>

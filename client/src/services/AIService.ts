@@ -11,7 +11,7 @@ export const generateQuote = async (prompt: string, tag: string) => {
     });
 
     console.log(response.data);
-    return response.data, tag;
+    return response.data;
   } catch (error) {
     console.error("Error generating quote:", error);
     throw error;
