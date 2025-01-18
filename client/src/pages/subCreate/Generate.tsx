@@ -27,6 +27,7 @@ const Generate = () => {
   const [prompt, setPrompt] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [tag, setTag] = useState<Tag | "">("");
+  const [displayText, setDisplayText] = useState<string>("");
 
   const defaultMessage =
     "Welcome to Quoteful AI. What kind of quote or thought do you have in mind?";
@@ -61,13 +62,28 @@ const Generate = () => {
     setContent(defaultMessage);
   }, []);
 
+  useEffect(() => {
+    let i = 0;
+    setDisplayText("");
+
+    const interval = setInterval(() => {
+      if (i < content.length) {
+        setDisplayText((prev) => prev + content[i]);
+        i++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 40);
+
+    return () => clearInterval(interval);
+  }, [content]);
+
   return (
     <main className="bg-lime-950/15 h-screen">
       <IconBar />
 
       <div id="ai-response-field" className="mt-64 px-96">
-        {/* This is where AI's response will go. It will also have super cool typing animation. */}
-        <p className="text-center text-2xl">{content}</p>
+        <p className="text-center text-2xl">{displayText}</p>
       </div>
 
       <div id="input-bar" className="flex justify-center mt-80 ml-20">
