@@ -28,7 +28,7 @@ const Explore = () => {
               setTag(value as Tag);
             }}
           >
-            <SelectTrigger className="w-[150px] h-10 border-gray-500 rounded-sm bg-transparent text-lg">
+            <SelectTrigger className="w-[150px] h-10 border-gray-500 rounded-sm bg-zinc-950 text-lg">
               <SelectValue placeholder="Search Tag" />
             </SelectTrigger>
             <SelectContent className="bg-zinc-950 text-white">
@@ -56,6 +56,23 @@ const Explore = () => {
             size={32}
             className="mt-1 text-gray-400 transition duration-250 hover:text-white"
           />
+        </div>
+      </div>
+
+      <div id="explore-container" className="flex border h-[700px] mx-40 my-16">
+        <div id="container-left" className="w-1/2 border"></div>
+        <div id="container-right" className="w-1/2 border">
+          <div id="container-right-top" className="h-1/2 border"></div>
+          <div id="container-right-bottom" className="flex h-1/2 border">
+            <div
+              id="container-right-bottom-left"
+              className="w-1/2 border"
+            ></div>
+            <div
+              id="container-right-bottom-right"
+              className="w-1/2 border"
+            ></div>
+          </div>
         </div>
       </div>
     </main>
