@@ -24,7 +24,7 @@ const promptTemplate = new PromptTemplate({
 });
 
 export const generateAIResponse = async (req: Request, res: any) => {
-  const { tag, prompt } = req.body;
+  const { prompt, tag } = req.body;
 
   try {
     if (!prompt) {
