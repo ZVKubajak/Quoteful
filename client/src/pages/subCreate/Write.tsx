@@ -9,8 +9,7 @@ import { z } from "zod";
 
 import Swal from "sweetalert2";
 import tagStyles from "@/lib/tagStyles";
-import { MoveLeft } from "lucide-react";
-import { CircleHelp } from "lucide-react";
+import IconBar from "@/components/IconBar";
 import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -131,18 +130,7 @@ const Write = () => {
 
   return (
     <main className="bg-zinc-950 h-screen">
-      <div id="icon-bar" className="flex justify-between w-full p-8">
-        {/* Redirects to /create. */}
-        <MoveLeft
-          size={40}
-          className="cursor-pointer text-gray-300 hover:text-white"
-        />
-        {/* Opens a modal that explains how to generate a quote. */}
-        <CircleHelp
-          size={40}
-          className="cursor-pointer text-gray-300 hover:text-white"
-        />
-      </div>
+      <IconBar />
 
       <h1 className="text-center text-6xl pt-8">Write Your Quote</h1>
 

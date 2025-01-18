@@ -1,5 +1,4 @@
-import { MoveLeft } from "lucide-react";
-import { CircleHelp } from "lucide-react";
+import IconBar from "@/components/IconBar";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,18 +15,7 @@ import {
 const Generate = () => {
   return (
     <main className="bg-lime-950/15 h-screen">
-      <div id="icon-bar" className="flex justify-between w-full p-8">
-        {/* Redirects to /create. */}
-        <MoveLeft
-          size={40}
-          className="cursor-pointer text-gray-300 hover:text-white"
-        />
-        {/* Opens a modal that explains how to generate a quote. */}
-        <CircleHelp
-          size={40}
-          className="cursor-pointer text-gray-300 hover:text-white"
-        />
-      </div>
+      <IconBar />
 
       <div id="ai-response-field" className="mt-64 px-96">
         {/* This is where AI's response will go. It will also have super cool typing animation. */}
