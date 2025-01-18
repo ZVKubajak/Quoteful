@@ -10,8 +10,7 @@ export const generateQuote = async (prompt: string, tag: string) => {
       tag,
     });
 
-    console.log(response.data);
-    return response.data;
+    return response.data.quote;
   } catch (error) {
     console.error("Error generating quote:", error);
     throw error;

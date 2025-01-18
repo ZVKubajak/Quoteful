@@ -45,6 +45,17 @@ const Generate = () => {
     setPrompt(e.target.value);
   };
 
+  const onSend = async (prompt: string, tag: string) => {
+    try {
+      const response = await generateQuote(prompt, tag);
+
+      console.log(response);
+      setContent(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <main className="bg-lime-950/15 h-screen">
       <IconBar />
@@ -59,7 +70,12 @@ const Generate = () => {
 
       <div id="input-bar" className="flex justify-center mt-80 ml-20">
         <div id="tag-selector" className="w-1/5">
-          <Select>
+          <Select
+            value={tag}
+            onValueChange={(value) => {
+              setTag(value as Tag);
+            }}
+          >
             <SelectTrigger className="w-[180px] h-12 border-gray-500 rounded-sm bg-zinc-950 text-lg ml-40">
               <SelectValue placeholder="Select Tag" />
             </SelectTrigger>
@@ -89,7 +105,12 @@ const Generate = () => {
           />
         </div>
         <div id="send-prompt-button" className="flex w-1/5">
-          <Button variant="outline" className="bg-zinc-950 text-md mt-1 ml-4">
+          <Button
+            type="submit"
+            onClick={() => onSend(prompt, tag)}
+            variant="outline"
+            className="bg-zinc-950 text-md mt-1 ml-4"
+          >
             Send <Send />
           </Button>
           <Save size={40} className="mt-1 ml-3" />
