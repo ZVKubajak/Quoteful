@@ -28,7 +28,7 @@ const Generate = () => {
   const [content, setContent] = useState<string>("");
   const [tag, setTag] = useState<Tag | "">("");
 
-  const promptCharCount = 200;
+  const promptCharCount = 150;
 
   const navigate = useNavigate();
 
@@ -40,6 +40,10 @@ const Generate = () => {
       (userId = profile.id), (username = profile.username);
     }
   }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPrompt(e.target.value);
+  };
 
   return (
     <main className="bg-lime-950/15 h-screen">
@@ -76,6 +80,11 @@ const Generate = () => {
           <Input
             type="text"
             placeholder="Write a quote about thoughtfulness."
+            value={prompt}
+            onChange={(e) => {
+              handleInputChange(e);
+            }}
+            maxLength={promptCharCount}
             className="border-gray-500 transition duration-250 hover:shadow-md hover:shadow-gray-900 bg-zinc-950 text-white !text-xl h-12"
           />
         </div>
@@ -85,6 +94,12 @@ const Generate = () => {
           </Button>
           <Save size={40} className="mt-1 ml-3" />
         </div>
+      </div>
+
+      <div className="flex justify-end mt-1">
+        <p className="w-3/5 text-lg text-gray-400 mr-16">
+          {prompt.length}/{promptCharCount}
+        </p>
       </div>
     </main>
   );
