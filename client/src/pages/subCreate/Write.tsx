@@ -50,7 +50,7 @@ const Write = () => {
   const [content, setContent] = useState("");
   const [tag, setTag] = useState<Tag | "">("");
 
-  const contentCharCount = 250;
+  const contentCharCount = 20;
 
   const navigate = useNavigate();
 
@@ -86,6 +86,14 @@ const Write = () => {
       tag: "",
     },
   });
+
+  const handleTextareaChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>,
+    field: any
+  ) => {
+    field.onChange(e);
+    setContent(e.target.value);
+  };
 
   const onSubmit = async (values: z.infer<typeof quoteFormSchema>) => {
     try {
@@ -143,12 +151,19 @@ const Write = () => {
                 name="quote"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-3xl">Quote</FormLabel>
+                    <FormLabel className="text-3xl">
+                      Quote
+                      <span className="text-xl text-gray-400 ml-4">
+                        {content.length}/{contentCharCount}
+                      </span>
+                    </FormLabel>
                     <FormControl>
                       <Textarea
                         placeholder="Your life is your own quote, so define it. – Shashidhar Sa"
+                        onChange={(e) => handleTextareaChange(e, field)}
+                        maxLength={contentCharCount}
                         className="resize-none bg-zinc-950 border-gray-800"
-                        {...field}
+                        // {...field}
                       />
                     </FormControl>
                     <FormMessage />
@@ -204,11 +219,7 @@ const Write = () => {
 
         <section id="quote-preview" className="w-1/2 px-32 py-20">
           <div className="w-full border rounded-2xl text-xl p-4">
-            <p>
-              "Your life is your own quote, so define it. Lorem ipsum dolor sit
-              amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua."
-            </p>
+            <p className="text-clip overflow-hidden">{content}</p>
 
             <div className="flex mt-10 mx-4">
               <div className="flex w-3/5">
