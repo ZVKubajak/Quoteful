@@ -19,12 +19,12 @@ const model = new ChatOpenAI({
 
 const promptTemplate = new PromptTemplate({
   template:
-    "You are exceptional at generating thoughtful quotes. Your goal is to generate a quote based on the given prompt included in the user's input. Sometimes a tag may be provided which contains a one-word adjective. If a tag is included along with the user's input, generate a quote that can be described with the given tag. Here is the user's input: {user_input}.",
+    "You are exceptional at generating thoughtful quotes. Your goal is to generate a quote based on the given prompt included in the user's input. Sometimes a tag may be provided which contains a one-word adjective. If a tag is included along with the user's input, generate a quote that can be described with the given tag. Keep your responses strictly between 8-200 characters long. Here is the user's input: {user_input}.",
   inputVariables: ["user_input"],
 });
 
 export const generateAIResponse = async (req: Request, res: any) => {
-  const { tag, prompt } = req.body;
+  const { prompt, tag } = req.body;
 
   try {
     if (!prompt) {
@@ -43,7 +43,10 @@ export const generateAIResponse = async (req: Request, res: any) => {
 
     res
       .status(200)
-      .json({ message: "Quote generated successfully.", quote: response.lc_kwargs.content });
+      .json({
+        message: "Quote generated successfully.",
+        quote: response.lc_kwargs.content,
+      });
   } catch (error: any) {
     console.error("Error generating quote:", error);
     res.status(500).json({ message: error.message });
