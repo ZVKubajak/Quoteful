@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import auth from "@/auth/auth";
 import { useNavigate } from "react-router-dom";
 import { generateQuote } from "@/services/AIService";
@@ -28,6 +28,8 @@ const Generate = () => {
   const [content, setContent] = useState<string>("");
   const [tag, setTag] = useState<Tag | "">("");
 
+  const defaultMessage =
+    "Welcome to Quoteful AI. What kind of quote or thought do you have in mind?";
   const promptCharCount = 150;
 
   const navigate = useNavigate();
@@ -49,12 +51,15 @@ const Generate = () => {
     try {
       const response = await generateQuote(prompt, tag);
 
-      console.log(response);
       setContent(response);
     } catch (error) {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    setContent(defaultMessage);
+  }, []);
 
   return (
     <main className="bg-lime-950/15 h-screen">
@@ -62,10 +67,7 @@ const Generate = () => {
 
       <div id="ai-response-field" className="mt-64 px-96">
         {/* This is where AI's response will go. It will also have super cool typing animation. */}
-        <p className="text-center text-2xl">
-          Welcome to Quoteful AI. What kind of quote or thought do you have in
-          mind?
-        </p>
+        <p className="text-center text-2xl">{content}</p>
       </div>
 
       <div id="input-bar" className="flex justify-center mt-80 ml-20">
@@ -118,7 +120,8 @@ const Generate = () => {
       </div>
 
       <div className="flex justify-end mt-1">
-        <p className="w-3/5 text-lg text-gray-400 mr-16">
+        <p className="text-lg text-gray-500 mr-14">Tags are optional.</p>
+        <p className="w-3/5 text-lg text-gray-500 mr-16">
           {prompt.length}/{promptCharCount}
         </p>
       </div>
