@@ -69,8 +69,8 @@ const Generate = () => {
           confirmButtonColor: "#3085d6",
           background: "#333",
           color: "#fff",
-          allowOutsideClick: false,
-          allowEscapeKey: false,
+          allowOutsideClick: true,
+          allowEscapeKey: true,
         }).then((result) => {
           if (result.isConfirmed) {
             navigate("/signup");
@@ -102,7 +102,8 @@ const Generate = () => {
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           navigate("/create/generate");
 
-          setContent("");
+          setPrompt("");
+          setContent(defaultMessage);
           setTag("");
         }
       });
@@ -184,7 +185,11 @@ const Generate = () => {
           >
             Send <Send />
           </Button>
-          <Save size={40} onClick={onSave} className="mt-1 ml-3" />
+          <Save
+            size={40}
+            onClick={onSave}
+            className="cursor-pointer mt-1 ml-3"
+          />
         </div>
       </div>
 
