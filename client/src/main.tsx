@@ -35,7 +35,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/create/generate",
-        element: <Generate />,
+        element: (
+          <AuthGuard>
+            <Generate />
+          </AuthGuard>
+        ),
       },
       {
         path: "/create/write",

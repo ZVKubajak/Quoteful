@@ -63,7 +63,7 @@ const Write = () => {
   } else {
     Swal.fire({
       title: "Account Required",
-      text: "You need to create an account to write a quote.",
+      text: "You need an account to write a quote.",
       icon: "warning",
       confirmButtonText: "Create Account",
       confirmButtonColor: "#3085d6",

@@ -58,6 +58,59 @@ const Generate = () => {
     }
   };
 
+  const onSave = async () => {
+    try {
+      if (userId === "" || username === "") {
+        Swal.fire({
+          title: "Account Required",
+          text: "You need an account to save a quote.",
+          icon: "warning",
+          confirmButtonText: "Create Account",
+          confirmButtonColor: "#3085d6",
+          background: "#333",
+          color: "#fff",
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            navigate("/signup");
+          } else {
+            return;
+          }
+        });
+      }
+
+      await createQuote(userId, content, tag || "");
+
+      Swal.fire({
+        title: "Quote Saved",
+        text: "Check out your new quote or create another one.",
+        icon: "success",
+        showCloseButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Go To Quote",
+        cancelButtonText: "Create More",
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#3ea381",
+        background: "#333",
+        color: "#fff",
+        allowOutsideClick: true,
+        allowEscapeKey: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/my-quotes");
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          navigate("/create/generate");
+
+          setContent("");
+          setTag("");
+        }
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     setContent(defaultMessage);
   }, []);
@@ -131,7 +184,7 @@ const Generate = () => {
           >
             Send <Send />
           </Button>
-          <Save size={40} className="mt-1 ml-3" />
+          <Save size={40} onClick={onSave} className="mt-1 ml-3" />
         </div>
       </div>
 
