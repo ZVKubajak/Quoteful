@@ -40,8 +40,8 @@ const quoteFormSchema = z.object({
     .min(8, {
       message: "Quote must be at least 8 characters long.",
     })
-    .max(250, {
-      message: "Quote can not be more than 250 characters.",
+    .max(200, {
+      message: "Quote can not be more than 200 characters.",
     }),
   tag: z.string().optional(),
 });
@@ -50,7 +50,7 @@ const Write = () => {
   const [content, setContent] = useState("");
   const [tag, setTag] = useState<Tag | "">("");
 
-  const contentCharCount = 20;
+  const contentCharCount = 200;
 
   const navigate = useNavigate();
 
@@ -118,6 +118,10 @@ const Write = () => {
           navigate("/my-quotes");
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           navigate("/create/write");
+
+          form.reset();
+          setContent("");
+          setTag("");
         }
       });
     } catch (error) {
@@ -160,10 +164,10 @@ const Write = () => {
                     <FormControl>
                       <Textarea
                         placeholder="Your life is your own quote, so define it. – Shashidhar Sa"
+                        value={content}
                         onChange={(e) => handleTextareaChange(e, field)}
                         maxLength={contentCharCount}
                         className="resize-none bg-zinc-950 border-gray-800"
-                        // {...field}
                       />
                     </FormControl>
                     <FormMessage />
