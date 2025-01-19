@@ -1,6 +1,8 @@
 import { Router } from "express";
 import {
+  getQuotes,
   getQuotesByUserId,
+  getQuotesByTag,
   getQuoteById,
   createQuote,
   updateQuote,
@@ -9,7 +11,9 @@ import {
 
 const router = Router();
 
+router.get("/", getQuotes);
 router.get("/user/:id", getQuotesByUserId);
+router.get("/tag/:tag", getQuotesByTag);
 router.get("/:id", getQuoteById);
 router.post("/", createQuote);
 router.put("/:id", updateQuote);
