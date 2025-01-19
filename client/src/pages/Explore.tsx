@@ -33,17 +33,24 @@ interface Quote {
 const Explore = () => {
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [tag, setTag] = useState<Tag | "">("");
-  // const [query, setQuery] = useState<string>("");
+  const [query, setQuery] = useState<string>("");
+
+  const queryCharCount = 200;
 
   const getAllQuotes = async () => {
     const allQuotes = await getQuotes();
-    console.log("Here are all of the quotes:", allQuotes);
     setQuotes(allQuotes);
   };
 
-  const onSearch = () => {
-    console.log(quotes[1]);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value.toLowerCase());
   };
+
+  const filteredQuotes = quotes.filter(
+    (quote) =>
+      quote.content.toLowerCase().includes(query) ||
+      quote.user.username.toLowerCase().includes(query)
+  );
 
   useEffect(() => {
     getAllQuotes();
@@ -79,14 +86,16 @@ const Explore = () => {
           <Input
             type="search"
             placeholder="Search by username."
+            value={query}
+            onChange={(e) => handleInputChange(e)}
+            maxLength={queryCharCount}
             className="border-gray-500 transition duration-250 hover:shadow-md hover:shadow-gray-900 bg-zinc-950 text-white !text-xl h-10"
           />
         </div>
         <div id="search-button">
           <Search
             size={32}
-            onClick={onSearch}
-            className="mt-1 text-gray-400 transition duration-250 hover:text-white"
+            className="cursor-pointer mt-1 text-gray-400 transition duration-250 hover:text-white"
           />
         </div>
       </div>
@@ -100,19 +109,19 @@ const Explore = () => {
           className="flex flex-col w-1/2 border rounded-l-xl"
         >
           <div id="current-search" className="border-b border-gray-400">
-            <p className="text-4xl p-4">Quotes by:</p>
+            <p className="text-4xl text-gray-500 p-4">
+              Filter: <span className="text-white">{query}</span>
+            </p>
           </div>
           <ScrollArea className="flex-grow px-20">
             <div id="searched-quotes-container" className="space-y-20 py-12">
               {quotes.length > 0 ? (
-                quotes.map((quote, index) => (
+                filteredQuotes.map((quote, index) => (
                   <div
                     key={quote.id || index}
                     className="border rounded-2xl text-xl p-4"
                   >
-                    <p className="text-clip overflow-hidden">
-                      {quote.content}
-                    </p>
+                    <p className="text-clip overflow-hidden">{quote.content}</p>
                     <div className="flex mt-10 mx-4">
                       <div className="flex w-3/5">
                         <h2 className="text-2xl">– {quote.user.username}</h2>
