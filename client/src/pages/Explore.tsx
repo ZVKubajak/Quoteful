@@ -177,7 +177,10 @@ const Explore = () => {
             className="flex flex-col h-1/2 border rounded-r-xl p-12"
           >
             <div className="flex-grow flex justify-between items-center">
-              <ChevronLeft size={32} className="border rounded-full pr-1" />
+              <ChevronLeft
+                size={32}
+                className="border-2 border-gray-500 transition duration-250 hover:border-gray-800 hover:text-gray-500 rounded-full pr-1"
+              />
               <div
                 id="carousel-quote-container"
                 className="w-4/5 border rounded-2xl text-xl p-4"
@@ -202,14 +205,28 @@ const Explore = () => {
                   )}
                 </div>
               </div>
-              <ChevronRight size={32} className="border rounded-full pl-1" />
+              <ChevronRight
+                size={32}
+                className="border-2 border-gray-500 transition duration-250 hover:border-gray-800 hover:text-gray-500 rounded-full pl-1"
+              />
             </div>
           </div>
           <div id="container-right-bottom" className="flex h-1/2">
             <div
               id="container-right-bottom-left"
-              className="w-1/2 border-x border-b rounded-br-lg"
-            ></div>
+              className="flex flex-col w-1/2 border-x border-b rounded-br-lg p-6"
+            >
+              <div className="flex-grow text-xl">
+                <p className="text-clip overflow-hidden">
+                  "Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry."
+                </p>
+
+                <div className="flex mt-10 mx-4">
+                  <h2 className="text-xl">– Bryce John Berczik</h2>
+                </div>
+              </div>
+            </div>
             <div
               id="container-right-bottom-right"
               className="w-1/2 bg-[#02040D]"
