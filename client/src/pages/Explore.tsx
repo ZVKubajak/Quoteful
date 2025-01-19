@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import tagStyles from "@/lib/tagStyles";
 import { Search } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -172,8 +174,37 @@ const Explore = () => {
         <div id="container-right" className="w-1/2">
           <div
             id="container-right-top"
-            className="h-1/2 border rounded-r-xl"
-          ></div>
+            className="flex flex-col h-1/2 border rounded-r-xl p-12"
+          >
+            <div className="flex-grow flex justify-between items-center">
+              <ChevronLeft size={32} className="border rounded-full pr-1" />
+              <div
+                id="carousel-quote-container"
+                className="w-4/5 border rounded-2xl text-xl p-4"
+              >
+                <p className="text-clip overflow-hidden">
+                  "What's up guys, this is a quote."
+                </p>
+
+                <div className="flex mt-10 mx-4">
+                  <div className="flex w-3/5">
+                    <h2 className="text-2xl">– Username</h2>
+                  </div>
+
+                  {tag && (
+                    <div className="flex justify-end w-2/5">
+                      <Badge
+                        className={`border-2 rounded-lg text-lg ${tagStyles[tag]}`}
+                      >
+                        {tag}
+                      </Badge>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <ChevronRight size={32} className="border rounded-full pl-1" />
+            </div>
+          </div>
           <div id="container-right-bottom" className="flex h-1/2">
             <div
               id="container-right-bottom-left"
