@@ -1,8 +1,31 @@
 import { Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, QuoteTag } from "@prisma/client";
 import validator from "validator";
 
 const prisma = new PrismaClient();
+
+export const getQuotes = async (req: Request, res: Response) => {
+  try {
+    const quotes = await prisma.quote.findMany({
+      select: {
+        id: true,
+        user: true,
+        tag: true,
+        content: true,
+        createdAt: true,
+      },
+    });
+
+    if (quotes.length === 0) {
+      res.status(404).json({ message: "No quotes found." });
+    } else {
+      res.status(200).json(quotes);
+    }
+  } catch (error: any) {
+    console.error("Error fetching all quotes:", error);
+    res.status(500).json({ message: error.message });
+  }
+};
 
 export const getQuotesByUserId = async (req: Request, res: any) => {
   const { id } = req.params;
@@ -26,6 +49,32 @@ export const getQuotesByUserId = async (req: Request, res: any) => {
     }
   } catch (error: any) {
     console.error("Error fetching quotes by user id:", error);
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getQuotesByTag = async (req: Request, res: Response) => {
+  const { tag } = req.params;
+
+  try {
+    const quotes = await prisma.quote.findMany({
+      where: { tag: tag as QuoteTag },
+      select: {
+        id: true,
+        user: true,
+        tag: true,
+        content: true,
+        createdAt: true,
+      },
+    });
+
+    if (quotes.length === 0) {
+      res.status(404).json({ message: "No quotes found with this tag." });
+    } else {
+      res.status(200).json(quotes);
+    }
+  } catch (error: any) {
+    console.error("Error fetching quotes by tag:", error);
     res.status(500).json({ message: error.message });
   }
 };
