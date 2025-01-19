@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getQuotes } from "@/services/quoteService";
 
 import tagStyles from "@/lib/tagStyles";
 import { Search } from "lucide-react";
@@ -22,6 +23,16 @@ type Tag = keyof typeof tagStyles;
 
 const Explore = () => {
   const [tag, setTag] = useState<Tag | "">("");
+  // const [query, setQuery] = useState<string>("");
+
+  const getAllQuotes = async () => {
+    const allQuotes = await getQuotes();
+    console.log("Here are all of the quotes:", allQuotes);
+  };
+
+  useEffect(() => {
+    getAllQuotes();
+  }, []);
 
   return (
     <main className="bg-slate-950/50 h-screen">
@@ -235,7 +246,10 @@ const Explore = () => {
               id="container-right-bottom-right"
               className="w-1/2 bg-[#02040D]"
             >
-              <div id="logo-mark" className="flex flex-col items-center text-gray-700">
+              <div
+                id="logo-mark"
+                className="flex flex-col items-center text-gray-700"
+              >
                 <Quote size={80} className="mt-24" />
                 <h3 className="mt-4 font-montserrat text-6xl">Quoteful</h3>
               </div>
