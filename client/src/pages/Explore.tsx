@@ -235,7 +235,7 @@ const Explore = () => {
               id="container-right-bottom-right"
               className="w-1/2 bg-[#02040D]"
             >
-              <div className="flex flex-col items-center text-gray-700">
+              <div id="logo-mark" className="flex flex-col items-center text-gray-700">
                 <Quote size={80} className="mt-24" />
                 <h3 className="mt-4 font-montserrat text-6xl">Quoteful</h3>
               </div>
