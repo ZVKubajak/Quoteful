@@ -21,13 +21,28 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 type Tag = keyof typeof tagStyles;
 
+interface Quote {
+  id: string;
+  tag: Tag;
+  content: string;
+  user: {
+    username: string;
+  };
+}
+
 const Explore = () => {
+  const [quotes, setQuotes] = useState<Quote[]>([]);
   const [tag, setTag] = useState<Tag | "">("");
   // const [query, setQuery] = useState<string>("");
 
   const getAllQuotes = async () => {
     const allQuotes = await getQuotes();
     console.log("Here are all of the quotes:", allQuotes);
+    setQuotes(allQuotes);
+  };
+
+  const onSearch = () => {
+    console.log(quotes[1]);
   };
 
   useEffect(() => {
@@ -70,6 +85,7 @@ const Explore = () => {
         <div id="search-button">
           <Search
             size={32}
+            onClick={onSearch}
             className="mt-1 text-gray-400 transition duration-250 hover:text-white"
           />
         </div>
@@ -87,99 +103,38 @@ const Explore = () => {
             <p className="text-4xl p-4">Quotes by:</p>
           </div>
           <ScrollArea className="flex-grow px-20">
-            <div className="space-y-20 py-12">
-              <div
-                id="searched-quote-container"
-                className="border rounded-2xl text-xl p-4"
-              >
-                <p className="text-clip overflow-hidden">
-                  "What's up guys, this is a quote."
-                </p>
-                <div className="flex mt-10 mx-4">
-                  <div className="flex w-3/5">
-                    <h2 className="text-2xl">– Username</h2>
-                  </div>
+            <div id="searched-quotes-container" className="space-y-20 py-12">
+              {quotes.length > 0 ? (
+                quotes.map((quote, index) => (
+                  <div
+                    key={quote.id || index}
+                    className="border rounded-2xl text-xl p-4"
+                  >
+                    <p className="text-clip overflow-hidden">
+                      "{quote.content}"
+                    </p>
+                    <div className="flex mt-10 mx-4">
+                      <div className="flex w-3/5">
+                        <h2 className="text-2xl">– {quote.user.username}</h2>
+                      </div>
 
-                  {tag && (
-                    <div className="flex justify-end w-2/5">
-                      <Badge
-                        className={`border-2 rounded-lg text-lg ${tagStyles[tag]}`}
-                      >
-                        {tag}
-                      </Badge>
+                      {quote.tag && (
+                        <div className="flex justify-end w-2/5">
+                          <Badge
+                            className={`border-2 rounded-lg text-lg ${
+                              tagStyles[quote.tag]
+                            }`}
+                          >
+                            {quote.tag}
+                          </Badge>
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-              </div>
-              <div
-                id="searched-quote-container"
-                className="border rounded-2xl text-xl p-4"
-              >
-                <p className="text-clip overflow-hidden">
-                  "What's up guys, this is a quote."
-                </p>
-                <div className="flex mt-10 mx-4">
-                  <div className="flex w-3/5">
-                    <h2 className="text-2xl">– Username</h2>
                   </div>
-
-                  {tag && (
-                    <div className="flex justify-end w-2/5">
-                      <Badge
-                        className={`border-2 rounded-lg text-lg ${tagStyles[tag]}`}
-                      >
-                        {tag}
-                      </Badge>
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div
-                id="searched-quote-container"
-                className="border rounded-2xl text-xl p-4"
-              >
-                <p className="text-clip overflow-hidden">
-                  "What's up guys, this is a quote."
-                </p>
-                <div className="flex mt-10 mx-4">
-                  <div className="flex w-3/5">
-                    <h2 className="text-2xl">– Username</h2>
-                  </div>
-
-                  {tag && (
-                    <div className="flex justify-end w-2/5">
-                      <Badge
-                        className={`border-2 rounded-lg text-lg ${tagStyles[tag]}`}
-                      >
-                        {tag}
-                      </Badge>
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div
-                id="searched-quote-container"
-                className="border rounded-2xl text-xl p-4"
-              >
-                <p className="text-clip overflow-hidden">
-                  "What's up guys, this is a quote."
-                </p>
-                <div className="flex mt-10 mx-4">
-                  <div className="flex w-3/5">
-                    <h2 className="text-2xl">– Username</h2>
-                  </div>
-
-                  {tag && (
-                    <div className="flex justify-end w-2/5">
-                      <Badge
-                        className={`border-2 rounded-lg text-lg ${tagStyles[tag]}`}
-                      >
-                        {tag}
-                      </Badge>
-                    </div>
-                  )}
-                </div>
-              </div>
+                ))
+              ) : (
+                <p>No quotes found.</p>
+              )}
             </div>
           </ScrollArea>
         </div>
