@@ -111,7 +111,7 @@ const Explore = () => {
                     className="border rounded-2xl text-xl p-4"
                   >
                     <p className="text-clip overflow-hidden">
-                      "{quote.content}"
+                      {quote.content}
                     </p>
                     <div className="flex mt-10 mx-4">
                       <div className="flex w-3/5">
