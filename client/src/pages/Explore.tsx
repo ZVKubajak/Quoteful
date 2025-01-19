@@ -4,6 +4,7 @@ import tagStyles from "@/lib/tagStyles";
 import { Search } from "lucide-react";
 import { ChevronLeft } from "lucide-react";
 import { ChevronRight } from "lucide-react";
+import { Quote } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -214,9 +215,12 @@ const Explore = () => {
           <div id="container-right-bottom" className="flex h-1/2">
             <div
               id="container-right-bottom-left"
-              className="flex flex-col w-1/2 border-x border-b rounded-br-lg p-6"
+              className="flex flex-col w-1/2 border-x border-b rounded-br-lg"
             >
-              <div className="flex-grow text-xl">
+              <div
+                id="random-quote-container"
+                className="flex-grow text-xl p-6"
+              >
                 <p className="text-clip overflow-hidden">
                   "Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry."
@@ -230,7 +234,12 @@ const Explore = () => {
             <div
               id="container-right-bottom-right"
               className="w-1/2 bg-[#02040D]"
-            ></div>
+            >
+              <div className="flex flex-col items-center text-gray-700">
+                <Quote size={80} className="mt-24" />
+                <h3 className="mt-4 font-montserrat text-6xl">Quoteful</h3>
+              </div>
+            </div>
           </div>
         </div>
       </div>
