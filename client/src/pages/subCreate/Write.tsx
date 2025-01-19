@@ -10,7 +10,6 @@ import { z } from "zod";
 import Swal from "sweetalert2";
 import tagStyles from "@/lib/tagStyles";
 import IconBar from "@/components/IconBar";
-import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -211,12 +210,11 @@ const Write = () => {
 
         <section id="quote-preview" className="w-1/2 px-32 py-20">
           <div className="w-full border rounded-2xl text-xl p-4">
-            <p className="text-clip overflow-hidden">{content}</p>
+            <p className="text-clip overflow-hidden">"{content}"</p>
 
             <div className="flex mt-10 mx-4">
               <div className="flex w-3/5">
                 <h2 className="text-2xl">– {username}</h2>
-                <ExternalLink size={20} className="ml-3" />
               </div>
 
               {tag && (
