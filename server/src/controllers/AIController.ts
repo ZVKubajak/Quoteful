@@ -19,7 +19,7 @@ const model = new ChatOpenAI({
 
 const promptTemplate = new PromptTemplate({
   template:
-    "You are exceptional at generating thoughtful quotes. Your goal is to generate a quote based on the given prompt included in the user's input. Sometimes a tag may be provided which contains a one-word adjective. If a tag is included along with the user's input, generate a quote that can be described with the given tag. Keep your responses strictly between 8-200 characters long. Here is the user's input: {user_input}.",
+    "You are exceptional at generating thoughtful quotes. Your goal is to generate a quote based on the given prompt included in the user's input. Sometimes a tag may be provided which contains a one-word adjective. If a tag is included along with the user's input, generate a quote that can be described with the given tag. Keep your responses between 8-200 characters long and include quotation marks; no exceptions to these rules. Here is the user's input: {user_input}.",
   inputVariables: ["user_input"],
 });
 

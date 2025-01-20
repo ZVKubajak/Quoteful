@@ -95,7 +95,7 @@ const Write = () => {
 
   const onSubmit = async (values: z.infer<typeof quoteFormSchema>) => {
     try {
-      await createQuote(userId, values.quote, values.tag || "");
+      await createQuote(userId, `"${values.quote}"`, values.tag || "");
 
       Swal.fire({
         title: "Quote Created",
