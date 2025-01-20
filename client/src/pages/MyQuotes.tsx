@@ -1,3 +1,16 @@
+import { useState, useEffect } from "react";
+import auth from "@/auth/auth";
+import { useNavigate } from "react-router-dom";
+import {
+  getQuotesByUserId,
+  updateQuote,
+  deleteQuote,
+} from "@/services/quoteService";
+
+import Swal from "sweetalert2";
+import tagStyles from "@/lib/tagStyles";
+import { Pencil } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
