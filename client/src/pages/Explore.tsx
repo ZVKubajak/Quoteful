@@ -53,11 +53,15 @@ const Explore = () => {
     setQuery(e.target.value.toLowerCase());
   };
 
-  const filteredQuotes = quotes.filter(
-    (quote) =>
+  const filteredQuotes = quotes.filter((quote) => {
+    const matchesQuery =
       quote.content.toLowerCase().includes(query) ||
-      quote.user.username.toLowerCase().includes(query)
-  );
+      quote.user.username.toLowerCase().includes(query);
+
+    const matchesTag = tag ? quote.tag === tag : true;
+
+    return matchesQuery && matchesTag;
+  });
 
   const getCarouselQuotes = () => {
     let quotesCopy = [...quotes];
