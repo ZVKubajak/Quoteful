@@ -150,7 +150,6 @@ const Explore = () => {
         <div id="search-button">
           <Search
             size={32}
-            onClick={getCarouselQuotes}
             className="cursor-pointer mt-1 text-gray-400 transition duration-250 hover:text-white"
           />
         </div>
