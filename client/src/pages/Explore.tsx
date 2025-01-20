@@ -38,6 +38,7 @@ interface Quote {
 const Explore = () => {
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [carouselQuotes, setCarouselQuotes] = useState<Quote[]>([]);
+  const [randomQuote, setRandomQuote] = useState<Quote | null>(null);
   const [tag, setTag] = useState<Tag | "">("");
   const [query, setQuery] = useState<string>("");
 
@@ -70,8 +71,14 @@ const Explore = () => {
       quotesCopy.splice(quoteIndex, 1);
     }
 
-    console.log(result);
     setCarouselQuotes(result);
+  };
+
+  const getRandomQuote = () => {
+    if (quotes.length === 0) return null;
+
+    const quoteIndex = Math.floor(Math.random() * quotes.length);
+    return quotes[quoteIndex];
   };
 
   useEffect(() => {
@@ -80,6 +87,23 @@ const Explore = () => {
 
   useEffect(() => {
     getCarouselQuotes();
+  }, [quotes]);
+
+  useEffect(() => {
+    const updateRandomQuote = () => {
+      const newQuote = getRandomQuote();
+      setRandomQuote(newQuote);
+    };
+
+    updateRandomQuote();
+
+    const interval = setInterval(() => {
+      updateRandomQuote();
+    }, 6000);
+
+    return () => {
+      clearInterval(interval);
+    };
   }, [quotes]);
 
   return (
@@ -232,16 +256,22 @@ const Explore = () => {
             >
               <div
                 id="random-quote-container"
-                className="flex-grow text-xl p-6"
+                className={`flex-grow text-xl p-6 ${
+                  randomQuote ? "random-quote" : ""
+                }`}
               >
-                <p className="text-clip overflow-hidden">
-                  "Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry."
-                </p>
-
-                <div className="flex mt-10 mx-4">
-                  <h2 className="text-xl">– Bryce John Berczik</h2>
-                </div>
+                {randomQuote ? (
+                  <>
+                    <p className="text-clip overflow-hidden">
+                      {randomQuote.content}
+                    </p>
+                    <div className="flex mt-10 mx-4">
+                      <h2 className="text-xl">– {randomQuote.user.username}</h2>
+                    </div>
+                  </>
+                ) : (
+                  <p>Loading...</p>
+                )}
               </div>
             </div>
             <div
