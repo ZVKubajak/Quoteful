@@ -127,6 +127,10 @@ const MyQuotes = () => {
     return matchesQuery && matchesTag;
   });
 
+  const getQuoteId = (quoteId: string) => {
+    console.log(quoteId);
+  };
+
   const onSubmit = async (values: z.infer<typeof quoteFormSchema>) => {
     try {
       await updateQuote(quoteId, `"${values.quote}"`, values.tag || "");
@@ -161,7 +165,7 @@ const MyQuotes = () => {
 
   return (
     <main className="flex bg-red-950/25 h-screen">
-      <div className="flex flex-col h-screen w-1/2 border">
+      <div className="flex flex-col h-screen w-1/2">
         <div className="flex flex-col h-[750px] mx-32 my-20 border rounded-2xl">
           <div
             id="search-bar"
@@ -210,8 +214,19 @@ const MyQuotes = () => {
                 filteredQuotes.map((quote, index) => (
                   <div
                     key={quote.id || index}
-                    className="border rounded-2xl text-xl p-4"
+                    className="relative border rounded-2xl text-xl p-4"
                   >
+                    <div className="absolute -bottom-[39px] right-5 flex space-x-3 px-3 py-2 bg-neutral-950 border border-gray-500 rounded-b-2xl">
+                      <Pencil
+                        size={20}
+                        onClick={() => getQuoteId(quote.id)}
+                        className="text-green-400 hover:text-green-500"
+                      />
+                      <Trash2
+                        size={20}
+                        className="text-red-400 hover:text-red-500"
+                      />
+                    </div>
                     <p className="text-clip overflow-hidden">{quote.content}</p>
                     <div className="flex mt-10 mx-4">
                       <div className="flex w-3/5">
