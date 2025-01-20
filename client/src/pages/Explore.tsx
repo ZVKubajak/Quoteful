@@ -4,6 +4,7 @@ import { getQuotes } from "@/services/quoteService";
 import tagStyles from "@/lib/tagStyles";
 import { Search } from "lucide-react";
 import { Quote } from "lucide-react";
+import { Frown } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -170,7 +171,7 @@ const Explore = () => {
           </div>
           <ScrollArea className="flex-grow px-20">
             <div id="searched-quotes-container" className="space-y-20 py-12">
-              {quotes.length > 0 ? (
+              {filteredQuotes.length > 0 ? (
                 filteredQuotes.map((quote, index) => (
                   <div
                     key={quote.id || index}
@@ -197,7 +198,10 @@ const Explore = () => {
                   </div>
                 ))
               ) : (
-                <p>No quotes found.</p>
+                <div className="text-gray-400">
+                  <p className="text-center text-5xl">No quotes found.</p>
+                  <Frown size={80} className="mx-auto mt-8" />
+                </div>
               )}
             </div>
           </ScrollArea>
@@ -246,7 +250,9 @@ const Explore = () => {
                     </CarouselItem>
                   ))
                 ) : (
-                  <p>No quotes found.</p>
+                  <p className="ml-36 text-5xl text-gray-400">
+                    No quotes found.
+                  </p>
                 )}
               </CarouselContent>
               <CarouselPrevious className="bg-inherit" />
@@ -274,7 +280,9 @@ const Explore = () => {
                     </div>
                   </>
                 ) : (
-                  <p>Loading...</p>
+                  <p className="text-center text-3xl text-gray-400 mt-28">
+                    No quotes found.
+                  </p>
                 )}
               </div>
             </div>
