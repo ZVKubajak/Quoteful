@@ -106,28 +106,56 @@ const MyQuotes = () => {
     },
   });
 
-  // const onSubmit = async (values: z.infer<typeof quoteFormSchema>) => {
-  //   try {
-  //     await updateQuote(
-  //       `"${values.quote}"`,
-  //       values.tag || ""
-  //     );
+  const getUserQuotes = async () => {
+    const userQuotes = await getQuotesByUserId(userId);
+    setQuotes(userQuotes);
+  };
 
-  //     Swal.fire({
-  //       title: "Quote Updated",
-  //       icon: "success",
-  //       confirmButtonText: "Continue",
-  //       confirmButtonColor: "#3085d6",
-  //       background: "#333",
-  //       color: "#fff",
-  //       allowOutsideClick: false,
-  //       allowEscapeKey: false,
-  //     }).then((result) => {
-  //       if (result.isConfirmed) {
-  //       }
-  //     });
-  //   } catch (error) {}
-  // };
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value.toLowerCase());
+  };
+
+  const filteredQuotes = quotes.filter((quote) => {
+    const matchesQuery =
+      quote.content.toLowerCase().includes(query) ||
+      quote.user.username.toLowerCase().includes(query);
+
+    const matchesTag = tag ? quote.tag === tag : true;
+
+    return matchesQuery && matchesTag;
+  });
+
+  const onSubmit = async (values: z.infer<typeof quoteFormSchema>) => {
+    try {
+      await updateQuote(quoteId, `"${values.quote}"`, values.tag || "");
+
+      Swal.fire({
+        title: "Quote Updated",
+        icon: "success",
+        confirmButtonText: "Continue",
+        confirmButtonColor: "#3085d6",
+        background: "#333",
+        color: "#fff",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          getUserQuotes();
+
+          form.reset();
+          setQuoteId("");
+          setContent("");
+          setTag("");
+        }
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getUserQuotes();
+  }, []);
 
   return (
     <main className="flex bg-red-950/25 h-screen">
