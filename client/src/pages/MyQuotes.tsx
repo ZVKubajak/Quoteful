@@ -67,7 +67,9 @@ const MyQuotes = () => {
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [quoteId, setQuoteId] = useState<string>("");
   const [content, setContent] = useState("");
+  const [contentEdit, setContentEdit] = useState("");
   const [tag, setTag] = useState<Tag | "">("");
+  const [tagEdit, setTagEdit] = useState<Tag | "">("");
   const [query, setQuery] = useState<string>("");
 
   const queryCharCount = 200;
@@ -127,11 +129,20 @@ const MyQuotes = () => {
     return matchesQuery && matchesTag;
   });
 
-  const getQuoteId = (quoteId: string) => {
+  const toggleEdit = (
+    quoteId: string,
+    quoteTag: string,
+    quoteContent: string
+  ) => {
     console.log(quoteId);
+    console.log(quoteTag);
+    console.log(quoteContent);
+
+    if (quoteTag) setTagEdit(quoteTag as Tag);
+    setContentEdit(quoteContent);
   };
 
-  const onSubmit = async (values: z.infer<typeof quoteFormSchema>) => {
+  const onUpdate = async (values: z.infer<typeof quoteFormSchema>) => {
     try {
       await updateQuote(quoteId, `"${values.quote}"`, values.tag || "");
 
@@ -159,12 +170,33 @@ const MyQuotes = () => {
     }
   };
 
+  const onDelete = async (quoteId: string) => {
+    try {
+      await deleteQuote(quoteId);
+
+      Swal.fire({
+        title: "Quote Deleted",
+        icon: "success",
+        confirmButtonText: "Continue",
+        confirmButtonColor: "#3085d6",
+        background: "#333",
+        color: "#fff",
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+      }).then((result) => {
+        if (result.isConfirmed) getUserQuotes();
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     getUserQuotes();
   }, []);
 
   return (
-    <main className="flex bg-red-950/25 h-screen">
+    <main className="flex bg-zinc-950 h-screen">
       <div className="flex flex-col h-screen w-1/2">
         <div className="flex flex-col h-[750px] mx-32 my-20 border rounded-2xl">
           <div
@@ -219,11 +251,14 @@ const MyQuotes = () => {
                     <div className="absolute -bottom-[39px] right-5 flex space-x-3 px-3 py-2 bg-neutral-950 border border-gray-500 rounded-b-2xl">
                       <Pencil
                         size={20}
-                        onClick={() => getQuoteId(quote.id)}
+                        onClick={() =>
+                          toggleEdit(quote.id, quote.tag, quote.content)
+                        }
                         className="text-green-400 hover:text-green-500"
                       />
                       <Trash2
                         size={20}
+                        onClick={() => onDelete(quote.id)}
                         className="text-red-400 hover:text-red-500"
                       />
                     </div>

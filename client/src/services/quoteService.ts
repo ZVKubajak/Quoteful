@@ -13,7 +13,9 @@ export const getQuotes = async () => {
 
 export const getQuotesByUserId = async (userId: string) => {
   try {
-    const response = await axios.get(`http://localhost:3001/quote/user/${userId}`);
+    const response = await axios.get(
+      `http://localhost:3001/quote/user/${userId}`
+    );
 
     return response.data;
   } catch (error) {
@@ -73,12 +75,8 @@ export const updateQuote = async (
 };
 
 export const deleteQuote = async (quoteId: string) => {
-  console.log(deleteQuote);
-
   try {
-    const response = await axios.delete(`http://localhost:3001/quote/${quoteId}`);
-
-    console.log(response.data);
+    await axios.delete(`http://localhost:3001/quote/${quoteId}`);
   } catch (error) {
     console.error("Error deleting quote:", error);
     throw error;
