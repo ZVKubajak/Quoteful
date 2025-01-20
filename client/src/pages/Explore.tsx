@@ -181,72 +181,49 @@ const Explore = () => {
           >
             <Carousel className="flex-grow flex items-center">
               <CarouselContent>
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <CarouselItem key={index}>
-                    <div
-                      id="carousel-quote-container"
-                      className="border rounded-2xl text-xl p-4"
+                {carouselQuotes.length > 0 ? (
+                  carouselQuotes.map((quote, index) => (
+                    <CarouselItem
+                      key={quote.id || index}
+                      className="flex flex-col"
                     >
-                      <p className="text-clip overflow-hidden">
-                        "What's up guys, this is a quote."
-                      </p>
+                      <div
+                        id="carousel-quote-container"
+                        className="flex-grow border rounded-2xl text-xl p-4"
+                      >
+                        <p className="text-clip overflow-hidden">
+                          {quote.content}
+                        </p>
 
-                      <div className="flex mt-10 mx-4">
-                        <div className="flex w-3/5">
-                          <h2 className="text-2xl">– Username</h2>
-                        </div>
-
-                        {tag && (
-                          <div className="flex justify-end w-2/5">
-                            <Badge
-                              className={`border-2 rounded-lg text-lg ${tagStyles[tag]}`}
-                            >
-                              {tag}
-                            </Badge>
+                        <div className="flex mt-10 mx-4">
+                          <div className="flex w-3/5">
+                            <h2 className="text-2xl">
+                              – {quote.user.username}
+                            </h2>
                           </div>
-                        )}
+
+                          {quote.tag && (
+                            <div className="flex justify-end w-2/5">
+                              <Badge
+                                className={`border-2 rounded-lg text-lg ${
+                                  tagStyles[quote.tag]
+                                }`}
+                              >
+                                {quote.tag}
+                              </Badge>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  </CarouselItem>
-                ))}
+                    </CarouselItem>
+                  ))
+                ) : (
+                  <p>No quotes found.</p>
+                )}
               </CarouselContent>
               <CarouselPrevious className="bg-inherit" />
               <CarouselNext className="bg-inherit" />
             </Carousel>
-            {/* <div className="flex-grow flex justify-between items-center">
-              <ChevronLeft
-                size={32}
-                className="border-2 border-gray-500 transition duration-250 hover:border-gray-800 hover:text-gray-500 rounded-full pr-1"
-              />
-              <div
-                id="carousel-quote-container"
-                className="w-4/5 border rounded-2xl text-xl p-4"
-              >
-                <p className="text-clip overflow-hidden">
-                  "What's up guys, this is a quote."
-                </p>
-
-                <div className="flex mt-10 mx-4">
-                  <div className="flex w-3/5">
-                    <h2 className="text-2xl">– Username</h2>
-                  </div>
-
-                  {tag && (
-                    <div className="flex justify-end w-2/5">
-                      <Badge
-                        className={`border-2 rounded-lg text-lg ${tagStyles[tag]}`}
-                      >
-                        {tag}
-                      </Badge>
-                    </div>
-                  )}
-                </div>
-              </div>
-              <ChevronRight
-                size={32}
-                className="border-2 border-gray-500 transition duration-250 hover:border-gray-800 hover:text-gray-500 rounded-full pl-1"
-              />
-            </div> */}
           </div>
           <div id="container-right-bottom" className="flex h-1/2">
             <div
