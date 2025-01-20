@@ -169,7 +169,7 @@ const Explore = () => {
               Filter: <span className="text-white">{query}</span>
             </p>
           </div>
-          <ScrollArea className="flex-grow px-20">
+          <ScrollArea className="flex-grow px-20 bg-neutral-950/50 rounded-bl-xl">
             <div id="searched-quotes-container" className="space-y-20 py-12">
               {filteredQuotes.length > 0 ? (
                 filteredQuotes.map((quote, index) => (
@@ -209,7 +209,7 @@ const Explore = () => {
         <div id="container-right" className="w-1/2">
           <div
             id="container-right-top"
-            className="flex flex-col h-1/2 border rounded-r-xl p-20"
+            className="flex flex-col h-1/2 border bg-neutral-950/50 rounded-r-xl p-20"
           >
             <Carousel className="flex-grow flex items-center">
               <CarouselContent>
@@ -262,7 +262,7 @@ const Explore = () => {
           <div id="container-right-bottom" className="flex h-1/2">
             <div
               id="container-right-bottom-left"
-              className="flex flex-col w-1/2 border-x border-b rounded-br-lg"
+              className="flex flex-col w-1/2 border-x border-b bg-neutral-950/50 rounded-br-lg"
             >
               <div
                 id="random-quote-container"
