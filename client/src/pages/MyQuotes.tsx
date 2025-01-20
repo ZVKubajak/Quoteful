@@ -13,6 +13,7 @@ import { z } from "zod";
 
 import Swal from "sweetalert2";
 import tagStyles from "@/lib/tagStyles";
+import { Frown } from "lucide-react";
 import { Pencil } from "lucide-react";
 import { Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -36,6 +37,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Badge } from "@/components/ui/badge";
 
 type Tag = keyof typeof tagStyles;
@@ -160,16 +162,21 @@ const MyQuotes = () => {
   return (
     <main className="flex bg-red-950/25 h-screen">
       <div className="flex flex-col h-screen w-1/2 border">
-        <div className="flex-grow mx-32 my-20 border rounded-2xl">
+        <div className="flex flex-col h-[750px] mx-32 my-20 border rounded-2xl">
           <div
             id="search-bar"
-            className="flex h-24 border rounded-t-2xl px-8 py-4"
+            className="flex h-24 border-b border-gray-400 px-8 py-4"
           >
             <div
               id="tag-selector"
               className="flex flex-grow w-1/3 items-center"
             >
-              <Select>
+              <Select
+                value={tag}
+                onValueChange={(value) => {
+                  setTag(value as Tag);
+                }}
+              >
                 <SelectTrigger className="w-[180px] h-12 border-gray-500 rounded-sm bg-zinc-950 text-lg">
                   <SelectValue placeholder="Search Tag" />
                 </SelectTrigger>
@@ -190,10 +197,49 @@ const MyQuotes = () => {
               <Input
                 type="search"
                 placeholder="Search by quote content."
+                value={query}
+                onChange={(e) => handleInputChange(e)}
+                maxLength={queryCharCount}
                 className="border-gray-500 transition duartion-250 hover:shadow-md hover:shadow-gray-900 bg-zinc-950 text-white !text-xl h-12"
               />
             </div>
           </div>
+          <ScrollArea className="flex-grow px-20">
+            <div id="searched-quotes-container" className="space-y-20 py-12">
+              {filteredQuotes.length > 0 ? (
+                filteredQuotes.map((quote, index) => (
+                  <div
+                    key={quote.id || index}
+                    className="border rounded-2xl text-xl p-4"
+                  >
+                    <p className="text-clip overflow-hidden">{quote.content}</p>
+                    <div className="flex mt-10 mx-4">
+                      <div className="flex w-3/5">
+                        <h2 className="text-2xl">– {quote.user.username}</h2>
+                      </div>
+
+                      {quote.tag && (
+                        <div className="flex justify-end w-2/5">
+                          <Badge
+                            className={`border-2 rounded-lg text-lg ${
+                              tagStyles[quote.tag]
+                            }`}
+                          >
+                            {quote.tag}
+                          </Badge>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="text-gray-400">
+                  <p className="text-center text-5xl">No quotes found.</p>
+                  <Frown size={80} className="mx-auto mt-8" />
+                </div>
+              )}
+            </div>
+          </ScrollArea>
         </div>
       </div>
       <div className="flex flex-col h-screen w-1/2 border"></div>
