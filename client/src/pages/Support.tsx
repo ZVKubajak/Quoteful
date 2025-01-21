@@ -126,36 +126,46 @@ const Support = () => {
         </div>
       </section>
       <section id="support-container" className="w-1/2 h-[500px] mt-20 mx-auto">
-        <div className="w-3/5 mx-auto">
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onUpdate)}
-              className="flex justify-evenly"
-            >
-              <FormField
-                control={form.control}
-                name="username"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Username</FormLabel>
-                    <FormControl>
-                      <Input type="username" className="bg-black" {...field} />
-                    </FormControl>
-                    {!form.formState.errors.username && (
-                      <FormDescription>
-                        Other users will see this. 3-20 characters.
-                      </FormDescription>
-                    )}
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit" variant="outline" className="bg-black mt-8">
-                Submit
-              </Button>
-            </form>
-          </Form>
-        </div>
+        {selected === "update" && (
+          <div className="w-3/5 mx-auto">
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onUpdate)}
+                className="flex justify-evenly"
+              >
+                <FormField
+                  control={form.control}
+                  name="username"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>New Username:</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="username"
+                          className="bg-black !text-lg"
+                          {...field}
+                        />
+                      </FormControl>
+                      {!form.formState.errors.username && (
+                        <FormDescription>
+                          Other users will see this. 3-20 characters.
+                        </FormDescription>
+                      )}
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button
+                  type="submit"
+                  variant="outline"
+                  className="bg-black text-lg mt-8"
+                >
+                  Submit
+                </Button>
+              </form>
+            </Form>
+          </div>
+        )}
       </section>
     </main>
   );
