@@ -7,7 +7,6 @@ export const updateUsername = async (userId: string, username: string) => {
     });
 
     console.log(response.data);
-    return response.data;
   } catch (error) {
     console.error("Error updating user:", error);
     throw error;
