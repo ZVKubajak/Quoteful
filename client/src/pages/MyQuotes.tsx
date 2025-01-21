@@ -297,7 +297,7 @@ const MyQuotes = () => {
           </ScrollArea>
         </div>
       </div>
-      <div className="flex flex-col h-screen w-1/2 border">
+      <div className="flex flex-col h-screen w-1/2">
         <section id="quote-edit-form" className="flex-grow mt-16 p-20">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onUpdate)}>
@@ -331,46 +331,50 @@ const MyQuotes = () => {
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="tag"
-                render={({ field }) => (
-                  <FormItem className="w-[180px] mt-8">
-                    <FormLabel className="text-xl">Tag</FormLabel>
-                    <Select
-                      value={tagEdit}
-                      onValueChange={(value) => {
-                        field.onChange(value);
-                        setTagEdit(value as Tag);
-                      }}
-                    >
-                      <FormControl className="bg-zinc-950 border-gray-800">
-                        <SelectTrigger>
-                          <SelectValue placeholder="Change Tag" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent className="bg-zinc-950 text-white">
-                        <SelectItem value="FUNNY">Funny</SelectItem>
-                        <SelectItem value="INTERESTING">Interesting</SelectItem>
-                        <SelectItem value="MEMORABLE">Memorable</SelectItem>
-                        <SelectItem value="MOTIVATIONAL">
-                          Motivational
-                        </SelectItem>
-                        <SelectItem value="POSITIVE">Positive</SelectItem>
-                        <SelectItem value="PROFOUND">Profound</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button
-                type="submit"
-                variant="ghost"
-                className="bg-white text-black text-xl mt-8 px-8"
-              >
-                Update
-              </Button>
+              <div className="flex mt-12">
+                <FormField
+                  control={form.control}
+                  name="tag"
+                  render={({ field }) => (
+                    <FormItem className="w-[180px] ml-28">
+                      <Select
+                        value={tagEdit}
+                        onValueChange={(value) => {
+                          field.onChange(value);
+                          setTagEdit(value as Tag);
+                        }}
+                      >
+                        <FormControl className="bg-zinc-950 border-gray-800">
+                          <SelectTrigger>
+                            <SelectValue placeholder="Change Tag" />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent className="bg-zinc-950 text-white">
+                          <SelectItem value="FUNNY">Funny</SelectItem>
+                          <SelectItem value="INTERESTING">
+                            Interesting
+                          </SelectItem>
+                          <SelectItem value="MEMORABLE">Memorable</SelectItem>
+                          <SelectItem value="MOTIVATIONAL">
+                            Motivational
+                          </SelectItem>
+                          <SelectItem value="POSITIVE">Positive</SelectItem>
+                          <SelectItem value="PROFOUND">Profound</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormDescription>Leave blank for no tag.</FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button
+                  type="submit"
+                  variant="ghost"
+                  className="bg-white text-black text-xl ml-56 px-8"
+                >
+                  Update
+                </Button>
+              </div>
             </form>
           </Form>
         </section>

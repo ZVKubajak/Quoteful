@@ -57,17 +57,11 @@ export const updateQuote = async (
   content: string,
   tag: string
 ) => {
-  console.log(quoteId);
-  console.log(content);
-  console.log(tag);
-
   try {
-    const response = await axios.put(`http://localhost:3001/quote/${quoteId}`, {
+    await axios.put(`http://localhost:3001/quote/${quoteId}`, {
       content,
       tag,
     });
-
-    console.log(response.data);
   } catch (error) {
     console.error("Error updating quote:", error);
     throw error;
