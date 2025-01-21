@@ -13,9 +13,9 @@ export const getQuotes = async () => {
 
 export const getQuotesByUserId = async (userId: string) => {
   try {
-    const response = await axios.get(`http://localhost:3001/user/`, {
-      params: { userId },
-    });
+    const response = await axios.get(
+      `http://localhost:3001/quote/user/${userId}`
+    );
 
     return response.data;
   } catch (error) {
@@ -26,9 +26,7 @@ export const getQuotesByUserId = async (userId: string) => {
 
 export const getQuotesByTag = async (tag: string) => {
   try {
-    const response = await axios.get(`http://localhost:3001/tag`, {
-      params: { tag },
-    });
+    const response = await axios.get(`http://localhost:3001/quote/tag/${tag}`);
 
     return response.data;
   } catch (error) {
@@ -50,6 +48,31 @@ export const createQuote = async (
     });
   } catch (error) {
     console.error("Error creating quote:", error);
+    throw error;
+  }
+};
+
+export const updateQuote = async (
+  quoteId: string,
+  content: string,
+  tag: string
+) => {
+  try {
+    await axios.put(`http://localhost:3001/quote/${quoteId}`, {
+      content,
+      tag,
+    });
+  } catch (error) {
+    console.error("Error updating quote:", error);
+    throw error;
+  }
+};
+
+export const deleteQuote = async (quoteId: string) => {
+  try {
+    await axios.delete(`http://localhost:3001/quote/${quoteId}`);
+  } catch (error) {
+    console.error("Error deleting quote:", error);
     throw error;
   }
 };
