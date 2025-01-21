@@ -66,11 +66,11 @@ const quoteFormSchema = z.object({
 const MyQuotes = () => {
   const [quotes, setQuotes] = useState<Quote[]>([]);
   const [quoteId, setQuoteId] = useState<string>("");
-  const [content, setContent] = useState("");
   const [contentEdit, setContentEdit] = useState("");
   const [tag, setTag] = useState<Tag | "">("");
   const [tagEdit, setTagEdit] = useState<Tag | "">("");
   const [query, setQuery] = useState<string>("");
+  const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
   const queryCharCount = 200;
   const contentCharCount = 200;
@@ -137,6 +137,7 @@ const MyQuotes = () => {
     setQuoteId(quoteId);
     if (quoteTag) setTagEdit(quoteTag as Tag);
     setContentEdit(quoteContent.slice(1, -1));
+    setIsDisabled(false);
   };
 
   const handleTextareaChange = (
@@ -168,6 +169,7 @@ const MyQuotes = () => {
           setQuoteId("");
           setContentEdit("");
           setTagEdit("");
+          setIsDisabled(true);
         }
       });
     } catch (error) {
@@ -322,6 +324,7 @@ const MyQuotes = () => {
                           value={contentEdit}
                           onChange={(e) => handleTextareaChange(e, field)}
                           maxLength={contentCharCount}
+                          disabled={isDisabled}
                           className="resize-none w-3/4 h-44 mx-auto !text-xl bg-zinc-950 border rounded-2xl p-4"
                         />
                       </FormControl>
@@ -351,6 +354,7 @@ const MyQuotes = () => {
                             field.onChange(value);
                             setTagEdit(value as Tag);
                           }}
+                          disabled={isDisabled}
                         >
                           <FormControl className="bg-zinc-950 border-gray-800">
                             <SelectTrigger>
@@ -380,6 +384,7 @@ const MyQuotes = () => {
                   <Button
                     type="submit"
                     variant="ghost"
+                    disabled={isDisabled}
                     className="bg-white text-black text-xl ml-56 px-8"
                   >
                     Update
