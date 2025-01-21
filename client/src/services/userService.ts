@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const updateUser = async (userId: string, username: string) => {
+export const updateUsername = async (userId: string, username: string) => {
   try {
     const response = await axios.put(`http://localhost:3001/user/${userId}`, {
       username,
