@@ -20,15 +20,11 @@ export const signUp = async (userInfo: TypeLogin) => {
 
 export const login = async (userInfo: TypeLogin) => {
   try {
-    const response = await axios.post(
-      "http://localhost:3001/auth/login",
-      userInfo,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await axios.post("/auth/login", userInfo, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     return response.data;
   } catch (error: any) {
