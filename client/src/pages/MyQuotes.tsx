@@ -203,7 +203,7 @@ const MyQuotes = () => {
   }, []);
 
   return (
-    <main className="bg-zinc-950 h-screen">
+    <main className="bg-zinc-950 h-screen mb-32">
       <h1 className="text-center text-5xl pt-20">{username}'s Quotes</h1>
 
       <div className="bg-zinc-950 flex h-screen">

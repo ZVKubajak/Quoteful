@@ -59,7 +59,7 @@ const Login = () => {
   };
 
   return (
-    <main>
+    <main className="h-screen">
       <h1 className="text-center font-caveat text-8xl py-16">Login</h1>
 
       <div className="flex justify-evenly">

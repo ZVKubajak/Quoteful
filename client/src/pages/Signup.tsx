@@ -65,7 +65,7 @@ const SignUp = () => {
   };
 
   return (
-    <main>
+    <main className="h-screen">
       <h1 className="text-center font-caveat text-6xl py-16">
         Create an Account
       </h1>
