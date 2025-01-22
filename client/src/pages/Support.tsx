@@ -8,6 +8,8 @@ import { z } from "zod";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Info } from "lucide-react";
+import { Github } from "lucide-react";
+import { Mail } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -222,7 +224,37 @@ const Support = () => {
             </div>
           </div>
         )}
-        {selected === "feedback" && <p>feedback</p>}
+        {selected === "feedback" && (
+          <div className="text-center text-xl space-y-6 border bg-neutral-950 rounded-2xl w-4/5 mx-auto p-8">
+            <p>
+              Send feedback directly to my email,{" "}
+              <span>zvkubajak@gmail.com</span>.
+            </p>
+            <p>or</p>
+            <div className="flex justify-center text-gray-600 space-x-8">
+              <a
+                href="https://github.com/ZVKubajak"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github
+                  size={64}
+                  className="cursor-pointer transition duration-250 hover:text-white"
+                />
+              </a>
+              <a
+                href="mailto:zvkubajak@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Mail
+                  size={64}
+                  className="cursor-pointer transition duration-250 hover:text-white"
+                />
+              </a>
+            </div>
+          </div>
+        )}
       </section>
     </main>
   );
