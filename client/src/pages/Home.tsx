@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 const Home = () => {
   return (
-    <main>
+    <main className="h-screen">
       <section id="heading" className="text-center">
         <h1 className="font-montserrat text-8xl py-20">Quoteful</h1>
         <p className="font-caveat text-6xl pb-10">
