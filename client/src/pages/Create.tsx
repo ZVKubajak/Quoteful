@@ -10,7 +10,11 @@ const Create = () => {
       >
         <div
           id="left-card"
-          className="flex flex-col w-3/4 border rounded-2xl mb-12 p-16 space-y-12"
+          className="flex flex-col w-3/4 border rounded-2xl mb-12 p-16 space-y-12 bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9)), url(../../public/images/generate.jpg)",
+          }}
         >
           <h2 className="text-center text-4xl">AI Quote Generator</h2>
 
@@ -36,7 +40,11 @@ const Create = () => {
         <h1 className="font-montserrat text-6xl">Have an Idea?</h1>
         <div
           id="right-card"
-          className="flex flex-col w-3/4 border rounded-2xl mt-12 p-16 space-y-12"
+          className="flex flex-col w-3/4 border rounded-2xl mt-12 p-16 space-y-12 bg-cover bg-center"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9)), url(../../public/images/write.jpg)",
+          }}
         >
           <h2 className="text-center text-4xl">Create Your Own</h2>
 

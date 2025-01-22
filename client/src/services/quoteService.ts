@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getQuotes = async () => {
   try {
-    const response = await axios.get(`http://localhost:3001/quote/`);
+    const response = await axios.get(`/quote/`);
 
     return response.data;
   } catch (error) {
@@ -13,9 +13,7 @@ export const getQuotes = async () => {
 
 export const getQuotesByUserId = async (userId: string) => {
   try {
-    const response = await axios.get(
-      `http://localhost:3001/quote/user/${userId}`
-    );
+    const response = await axios.get(`/quote/user/${userId}`);
 
     return response.data;
   } catch (error) {
@@ -26,7 +24,7 @@ export const getQuotesByUserId = async (userId: string) => {
 
 export const getQuotesByTag = async (tag: string) => {
   try {
-    const response = await axios.get(`http://localhost:3001/quote/tag/${tag}`);
+    const response = await axios.get(`/quote/tag/${tag}`);
 
     return response.data;
   } catch (error) {
@@ -41,7 +39,7 @@ export const createQuote = async (
   tag: string
 ) => {
   try {
-    await axios.post(`http://localhost:3001/quote/`, {
+    await axios.post(`/quote/`, {
       userId,
       content,
       tag,
@@ -58,7 +56,7 @@ export const updateQuote = async (
   tag: string
 ) => {
   try {
-    await axios.put(`http://localhost:3001/quote/${quoteId}`, {
+    await axios.put(`/quote/${quoteId}`, {
       content,
       tag,
     });
@@ -70,7 +68,7 @@ export const updateQuote = async (
 
 export const deleteQuote = async (quoteId: string) => {
   try {
-    await axios.delete(`http://localhost:3001/quote/${quoteId}`);
+    await axios.delete(`/quote/${quoteId}`);
   } catch (error) {
     console.error("Error deleting quote:", error);
     throw error;

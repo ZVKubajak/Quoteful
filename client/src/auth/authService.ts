@@ -3,15 +3,11 @@ import TypeLogin from "@/interfaces/login";
 
 export const signUp = async (userInfo: TypeLogin) => {
   try {
-    const response = await axios.post(
-      "http://localhost:3001/auth/signup",
-      userInfo,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await axios.post("/auth/signup", userInfo, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     return response.data;
   } catch (error: any) {

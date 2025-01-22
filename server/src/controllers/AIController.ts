@@ -41,12 +41,10 @@ export const generateAIResponse = async (req: Request, res: any) => {
 
     const response = await model.invoke(formattedPrompt);
 
-    res
-      .status(200)
-      .json({
-        message: "Quote generated successfully.",
-        quote: response.lc_kwargs.content,
-      });
+    res.status(200).json({
+      message: "Quote generated successfully.",
+      quote: response.lc_kwargs.content,
+    });
   } catch (error: any) {
     console.error("Error generating quote:", error);
     res.status(500).json({ message: error.message });

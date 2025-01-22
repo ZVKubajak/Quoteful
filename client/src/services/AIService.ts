@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const generateQuote = async (prompt: string, tag: string) => {
   try {
-    const response = await axios.post(`http://localhost:3001/ai`, {
+    const response = await axios.post(`/ai`, {
       prompt,
       tag,
     });
