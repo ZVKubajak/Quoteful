@@ -1,6 +1,6 @@
 import auth from "@/auth/auth";
 import { updateUsername, deleteUser } from "@/services/userService";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -38,16 +38,14 @@ const Support = () => {
   const [selected, setSelected] = useState<
     "update" | "delete" | "feedback" | null
   >(null);
-  const [currentUsername, setCurrentUsername] = useState<string>("");
 
   const navigate = useNavigate();
 
   let userId = "";
-  let username = "";
   if (!auth.guestLoggedIn()) {
     const profile = auth.getProfile();
     if (profile) {
-      (userId = profile.id), (username = profile.username);
+      userId = profile.id;
     }
   } else {
     Swal.fire({
@@ -77,10 +75,10 @@ const Support = () => {
   const onUpdate = async (values: z.infer<typeof usernameFormSchema>) => {
     try {
       await updateUsername(userId, values.username);
-      setCurrentUsername(values.username);
 
       Swal.fire({
         title: `Hello, ${values.username}!`,
+        text: "Your username has been updated.",
         icon: "success",
         confirmButtonText: "Continue",
         confirmButtonColor: "#3085d6",
@@ -133,10 +131,6 @@ const Support = () => {
       console.error(error);
     }
   };
-
-  useEffect(() => {
-    setCurrentUsername(username);
-  }, []);
 
   return (
     <main className="h-screen">
