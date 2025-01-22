@@ -1,5 +1,5 @@
 import auth from "@/auth/auth";
-import { updateUsername } from "@/services/userService";
+import { updateUsername, deleteUser } from "@/services/userService";
 import { useState, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -7,6 +7,7 @@ import { z } from "zod";
 
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Info } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -72,8 +73,6 @@ const Support = () => {
   });
 
   const onUpdate = async (values: z.infer<typeof usernameFormSchema>) => {
-    console.log(values.username);
-
     try {
       await updateUsername(userId, values.username);
       setCurrentUsername(values.username);
@@ -86,8 +85,48 @@ const Support = () => {
         background: "#333",
         color: "#fff",
         allowOutsideClick: true,
-        allowEscapeKey: false,
+        allowEscapeKey: true,
       });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const onDelete = async (userId: string) => {
+    try {
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "Deleting your account cannot be undone.",
+        icon: "warning",
+        showCloseButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Confirm",
+        cancelButtonText: "Go Back",
+        confirmButtonColor: "#ed0800",
+        cancelButtonColor: "#3085d6",
+        background: "#333",
+        color: "#fff",
+        allowOutsideClick: true,
+        allowEscapeKey: true,
+      });
+
+      if (result.isConfirmed) {
+        await Swal.fire({
+          title: "Account Deleted",
+          text: "Hope to see you again soon!",
+          icon: "success",
+          confirmButtonText: "Continue",
+          confirmButtonColor: "#3085d6",
+          background: "#333",
+          color: "#fff",
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+        });
+
+        deleteUser(userId);
+        auth.logout();
+        navigate("/");
+      }
     } catch (error) {
       console.error(error);
     }
@@ -125,7 +164,7 @@ const Support = () => {
           </p>
         </div>
       </section>
-      <section id="support-container" className="w-1/2 h-[500px] mt-20 mx-auto">
+      <section id="support-container" className="w-1/2 h-[500px] mt-32 mx-auto">
         {selected === "update" && (
           <div className="w-3/5 mx-auto">
             <Form {...form}>
@@ -166,6 +205,24 @@ const Support = () => {
             </Form>
           </div>
         )}
+        {selected === "delete" && (
+          <div className="flex flex-col items-center">
+            <Button
+              variant="outline"
+              onClick={() => onDelete(userId)}
+              className="w-1/5 border-red-600 bg-black text-xl p-5 text-gray-200 hover:bg-red-600 hover:text-white"
+            >
+              Delete Account
+            </Button>
+            <div className="flex justify-center w-1/2 text-red-500 mt-4">
+              <Info size={20} className="mt-[1px] mr-1" />
+              <p>
+                All of your quotes will be included in the deletion process.
+              </p>
+            </div>
+          </div>
+        )}
+        {selected === "feedback" && <p>feedback</p>}
       </section>
     </main>
   );
