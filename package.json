@@ -1,0 +1,32 @@
+{
+  "name": "quoteful",
+  "version": "1.0.0",
+  "description": "A website to explore and create your own thoughtful quotes.",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run client:build && npm run server",
+    "start:dev": "concurrently \"npm run server:dev\" \"wait-on tcp:3001 && npm run client:dev\"",
+    "server:dev": "cd server && npm run dev",
+    "client:dev": "cd client && npm run dev",
+    "server": "cd server && npm run start",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "client:build": "cd client && npm run build",
+    "build": "cd server && npm run build",
+    "render:build": "npm i && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZVKubajak/Quoteful.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ZVKubajak/Quoteful/issues"
+  },
+  "homepage": "https://github.com/ZVKubajak/Quoteful#readme",
+  "dependencies": {
+    "concurrently": "^9.1.2",
+    "wait-on": "^8.0.2"
+  }
+}
