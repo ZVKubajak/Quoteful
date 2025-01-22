@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 const Create = () => {
   return (
-    <main className="flex pt-20">
+    <main className="flex pt-20 mb-32">
       <section
         id="left-container"
         className="flex flex-col items-center w-1/2 border-r border-gray-700 p-12"
