@@ -19,6 +19,15 @@ Checkout the deployed site at [https://stellabyte-production.up.railway.app](htt
 
 Each quote has the option to contain a tag. Tags can be used to describe the quote in one word, and is useful to include for better searchability and generating precise AI quotes.
 
+Explore Page
+![Screenshot 2025-02-11 121256](https://github.com/user-attachments/assets/1513b4de-56ab-4361-a633-abd62b4f9069)
+
+Generate Quote Page
+![Screenshot 2025-02-11 121431](https://github.com/user-attachments/assets/7c7aaf8c-c151-4ce4-8608-4d18c211df09)
+
+Write Quote Page
+![Screenshot 2025-02-11 121528](https://github.com/user-attachments/assets/b1237ce8-8c09-486c-906c-6c879f487b33)
+
 ## Installation
 Requirements:
 * npm v10.9.2
