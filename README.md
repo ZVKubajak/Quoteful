@@ -15,7 +15,7 @@ Although the styling isn’t my strongest work, I believe the real strength of t
 - [Credits](#credits)
 
 ## Usage
-Checkout the deployed site at [https://stellabyte-production.up.railway.app](https://stellabyte-production.up.railway.app). Users can  view and generate quotes with AI, but will need to create an account to publish quotes of their own.
+Checkout the deployed site at [https://stellabyte-production.up.railway.app](https://stellabyte-production.up.railway.app). Users can view and generate quotes with AI, but will need to create an account to publish quotes of their own.
 
 Each quote has the option to contain a tag. Tags can be used to describe the quote in one word, and is useful to include for better searchability and generating precise AI quotes.
 
@@ -39,7 +39,7 @@ To install the source code for **Quoteful**, clone the repository locally using 
 
 Install all dependencies by running `npm run install`. Navigate to the server with `cd server`, and create a .env file with variables `DATABASE_URL`, `JWT_SECRET_KEY`, and `OPENAI_API_KEY`. Add the requirements respectively.
 
-Navigate back to the root of the project with `cd ..`, and start the development server with `npm run start:dev`. You're now ready to explore and use the app locally!
+Navigate back to the root of the project with `cd ..`. You might also need to add localhost prefixes in front of the client endpoints. Then start the development server with `npm run start:dev`. You're now ready to explore and use the app locally!
 
 ## Questions
 If you have any questions, reach out to me directly at [zvkubajak@gmail.com](mailto:zvkubajak@gmail.com).
