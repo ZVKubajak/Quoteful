@@ -33,7 +33,7 @@ Install all dependencies by running `npm run install`. Navigate to the server wi
 Navigate back to the root of the project with `cd ..`, and start the development server with `npm run start:dev`. You're now ready to explore and use the app locally!
 
 ## Questions
-If you have any questions, you can reach out to me at [zvkubajak@gmail.com](mailto:zvkubajak@gmail.com). You can also find more of my work at [ZVKubajak](https://github.com/ZVKubajak) on Github, or through my portfolio, [zvkubajak.dev](https://zvkubajak.dev).
+If you have any questions, reach out to me directly at [zvkubajak@gmail.com](mailto:zvkubajak@gmail.com).
 
 ## Credits
 Created by Zander Kubajak.
